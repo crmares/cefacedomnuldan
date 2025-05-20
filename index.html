@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Figure Activity Journal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f9fc;
+        }
+        
+        header {
+            background-color: #1a3a6e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search-container button {
+            padding: 10px 15px;
+            background-color: #1a3a6e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .timeline {
+            height: 600px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 10px;
+        }
+        
+        .year, .month, .week {
+            cursor: pointer;
+            padding: 8px 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .year {
+            background-color: #1a3a6e;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .month {
+            background-color: #4a6fa5;
+            color: white;
+            margin-left: 20px;
+        }
+        
+        .week {
+            background-color: #8faad1;
+            color: white;
+            margin-left: 40px;
+        }
+        
+        .day {
+            padding: 10px;
+            margin: 5px 0 5px 60px;
+            background-color: #edf2fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .day:hover {
+            background-color: #dde9f7;
+        }
+        
+        .day-details {
+            display: none;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .day.active {
+            background-color: #c1d6f0;
+            border-color: #8faad1;
+        }
+        
+        .activity {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .activity-time {
+            font-weight: bold;
+            color: #1a3a6e;
+        }
+        
+        .activity-title {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .activity-description {
+            margin-bottom: 10px;
+        }
+        
+        .reference {
+            font-size: 0.85em;
+            color: #666;
+            background-color: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .reference a {
+            color: #1a3a6e;
+            text-decoration: none;
+        }
+        
+        .reference a:hover {
+            text-decoration: underline;
+        }
+        
+        .collapsed {
+            display: none;
+        }
+        
+        .toggle-icon {
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                height: 500px;
+            }
+            
+            .day {
+                margin-left: 30px;
+            }
+            
+            .month {
+                margin-left: 15px;
+            }
+            
+            .week {
+                margin-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Senator James Mitchell: Activity Journal</h1>
+        <p>Tracking official activities, votes, public appearances, and statements</p>
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for activities, topics, or locations...">
+        <button id="searchButton">Search</button>
+    </div>
+    
+    <div class="timeline" id="timeline">
+        <!-- Timeline content will be dynamically generated -->
+        <div class="loading">Loading timeline data...</div>
+    </div>
+
+    <script>
+        // Mock data for our political figure's activities
+        const timelineData = {
+            "2025": {
+                "May": {
+                    "Week 3 (May 15-21)": {
+                        "2025-05-20": [
+                            {
+                                time: "09:30 AM", 
+                                title: "Senate Committee on Foreign Relations", 
+                                description: "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
+                                references: [
+                                    { text: "Official Senate Record", url: "#" },
+                                    { text: "C-SPAN Coverage", url: "#" }
+                                ]
+                            },
+                            {
+                                time: "02:00 PM", 
+                                title: "Floor Vote: H.R. 3782", 
+                                description: "Voted 'Yes' on the Infrastructure Development and Jobs Act Amendment",
+                                references: [
+                                    { text: "Congressional Voting Record", url: "#" }
+                                ]
+                            },
+                            {
+                                time: "04:30 PM", 
+                                title: "Press Conference", 
+                                description: "Held joint press conference with Senator Thompson discussing bipartisan climate legislation initiative.",
+                                references: [
+                                    { text: "Official Press Release", url: "#" },
+                                    { text: "Washington Post Coverage", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-19": [
+                            {
+                                time: "10:00 AM", 
+                                title: "Constituent Meeting", 
+                                description: "Met with representatives from State Teachers Association regarding education funding priorities.",
+                                references: [
+                                    { text: "Senator's Weekly Schedule", url: "#" }
+                                ]
+                            },
+                            {
+                                time: "01:00 PM", 
+                                title: "Budget Committee Working Group", 
+                                description: "Participated in closed-door session on upcoming fiscal appropriations.",
+                                references: [
+                                    { text: "Committee Minutes", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-18": [
+                            {
+                                time: "All Day", 
+                                title: "District Visit", 
+                                description: "Toured flood-damaged areas in northern counties and met with local officials about federal disaster assistance.",
+                                references: [
+                                    { text: "Local News Coverage", url: "#" },
+                                    { text: "Instagram Post", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-17": [
+                            {
+                                time: "11:00 AM", 
+                                title: "Community Town Hall", 
+                                description: "Hosted public forum on healthcare access and prescription drug pricing at City Community Center.",
+                                references: [
+                                    { text: "Event Recording", url: "#" },
+                                    { text: "Senator's Newsletter", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-16": [
+                            {
+                                time: "09:00 AM", 
+                                title: "Committee Votes", 
+                                description: "Voted to advance three judicial nominations to the full Senate.",
+                                references: [
+                                    { text: "Judiciary Committee Record", url: "#" }
+                                ]
+                            },
+                            {
+                                time: "02:30 PM", 
+                                title: "Policy Address", 
+                                description: "Delivered keynote address at University Law School on criminal justice reform proposals.",
+                                references: [
+                                    { text: "Speech Transcript", url: "#" },
+                                    { text: "University Event Page", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-15": [
+                            {
+                                time: "10:30 AM", 
+                                title: "Intelligence Briefing", 
+                                description: "Attended classified briefing on international security developments.",
+                                references: [
+                                    { text: "Senate Calendar", url: "#" }
+                                ]
+                            },
+                            {
+                                time: "03:00 PM", 
+                                title: "Bill Introduction", 
+                                description: "Introduced S.892, the 'Rural Broadband Expansion Act of 2025' with four co-sponsors.",
+                                references: [
+                                    { text: "Congressional Record", url: "#" },
+                                    { text: "Bill Text", url: "#" }
+                                ]
+                            }
+                        ]
+                    },
+                    "Week 2 (May 8-14)": {
+                        "2025-05-14": [
+                            {
+                                time: "09:00 AM", 
+                                title: "Agriculture Committee Hearing", 
+                                description: "Questioned witnesses on drought relief measures and farm subsidies.",
+                                references: [
+                                    { text: "Committee Transcript", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-12": [
+                            {
+                                time: "11:00 AM", 
+                                title: "Bipartisan Infrastructure Meeting", 
+                                description: "Participated in working group on transportation funding allocation formulas.",
+                                references: [
+                                    { text: "Meeting Minutes", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-10": [
+                            {
+                                time: "02:00 PM", 
+                                title: "Veterans Event", 
+                                description: "Attended ceremony honoring state Vietnam veterans and announced new VA clinic opening.",
+                                references: [
+                                    { text: "Local News Coverage", url: "#" }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "April": {
+                    "Week 4 (April 24-30)": {
+                        "2025-04-28": [
+                            {
+                                time: "10:00 AM", 
+                                title: "Committee Hearing", 
+                                description: "Led questioning on tech regulation and data privacy enforcement.",
+                                references: [
+                                    { text: "Senate Commerce Committee Record", url: "#" }
+                                ]
+                            }
+                        ],
+                        "2025-04-25": [
+                            {
+                                time: "03:30 PM", 
+                                title: "Economic Forum", 
+                                description: "Participated in panel discussion on inflation and monetary policy at Federal Reserve conference.",
+                                references: [
+                                    { text: "Event Program", url: "#" },
+                                    { text: "Economic Journal Coverage", url: "#" }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "2024": {
+                "December": {
+                    "Week 2 (December 8-14)": {
+                        "2024-12-10": [
+                            {
+                                time: "01:00 PM", 
+                                title: "Defense Authorization Vote", 
+                                description: "Voted for passage of annual defense spending authorization with amendment on cybersecurity funding.",
+                                references: [
+                                    { text: "Voting Record", url: "#" }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "November": {
+                    "Week 1 (November 1-7)": {
+                        "2024-11-05": [
+                            {
+                                time: "08:00 PM", 
+                                title: "Election Night", 
+                                description: "Re-elected to Senate with 53.7% of vote.",
+                                references: [
+                                    { text: "Election Results", url: "#" },
+                                    { text: "Victory Speech", url: "#" }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generateTimeline();
+            
+            document.getElementById('searchButton').addEventListener('click', searchActivities);
+            document.getElementById('searchInput').addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    searchActivities();
+                }
+            });
+        });
+
+        function generateTimeline() {
+            const timelineElement = document.getElementById('timeline');
+            timelineElement.innerHTML = ''; // Clear loading message
+            
+            // Generate years
+            Object.keys(timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
+                const yearDiv = document.createElement('div');
+                yearDiv.className = 'year';
+                yearDiv.innerHTML = `<span class="toggle-icon">▼</span> ${year}`;
+                timelineElement.appendChild(yearDiv);
+                
+                const monthsContainer = document.createElement('div');
+                monthsContainer.className = 'months-container';
+                timelineElement.appendChild(monthsContainer);
+                
+                // Generate months
+                Object.keys(timelineData[year]).sort((a, b) => {
+                    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                   'July', 'August', 'September', 'October', 'November', 'December'];
+                    return months.indexOf(b) - months.indexOf(a);
+                }).forEach(month => {
+                    const monthDiv = document.createElement('div');
+                    monthDiv.className = 'month';
+                    monthDiv.innerHTML = `<span class="toggle-icon">▼</span> ${month}`;
+                    monthsContainer.appendChild(monthDiv);
+                    
+                    const weeksContainer = document.createElement('div');
+                    weeksContainer.className = 'weeks-container';
+                    monthsContainer.appendChild(weeksContainer);
+                    
+                    // Generate weeks
+                    Object.keys(timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
+                        const weekDiv = document.createElement('div');
+                        weekDiv.className = 'week';
+                        weekDiv.innerHTML = `<span class="toggle-icon">▼</span> ${week}`;
+                        weeksContainer.appendChild(weekDiv);
+                        
+                        const daysContainer = document.createElement('div');
+                        daysContainer.className = 'days-container';
+                        weeksContainer.appendChild(daysContainer);
+                        
+                        // Generate days
+                        Object.keys(timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
+                            const activities = timelineData[year][month][week][day];
+                            const date = new Date(day);
+                            const formattedDate = date.toLocaleDateString('en-US', { 
+                                weekday: 'long', 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            });
+                            
+                            const dayDiv = document.createElement('div');
+                            dayDiv.className = 'day';
+                            dayDiv.dataset.date = day;
+                            dayDiv.textContent = `${formattedDate} (${activities.length} activities)`;
+                            daysContainer.appendChild(dayDiv);
+                            
+                            // Create the details container for this day
+                            const detailsDiv = document.createElement('div');
+                            detailsDiv.className = 'day-details';
+                            
+                            // Add activities to the details
+                            activities.forEach(activity => {
+                                const activityDiv = document.createElement('div');
+                                activityDiv.className = 'activity';
+                                
+                                const timeEl = document.createElement('div');
+                                timeEl.className = 'activity-time';
+                                timeEl.textContent = activity.time;
+                                activityDiv.appendChild(timeEl);
+                                
+                                const titleEl = document.createElement('div');
+                                titleEl.className = 'activity-title';
+                                titleEl.textContent = activity.title;
+                                activityDiv.appendChild(titleEl);
+                                
+                                const descEl = document.createElement('div');
+                                descEl.className = 'activity-description';
+                                descEl.textContent = activity.description;
+                                activityDiv.appendChild(descEl);
+                                
+                                // Add references
+                                if (activity.references && activity.references.length > 0) {
+                                    activity.references.forEach(ref => {
+                                        const refEl = document.createElement('div');
+                                        refEl.className = 'reference';
+                                        
+                                        const linkEl = document.createElement('a');
+                                        linkEl.href = ref.url;
+                                        linkEl.textContent = ref.text;
+                                        linkEl.target = '_blank';
+                                        
+                                        refEl.appendChild(linkEl);
+                                        activityDiv.appendChild(refEl);
+                                    });
+                                }
+                                
+                                detailsDiv.appendChild(activityDiv);
+                            });
+                            
+                            dayDiv.appendChild(detailsDiv);
+                            
+                            // Add click event
+                            dayDiv.addEventListener('click', function(e) {
+                                if (e.target.classList.contains('day')) {
+                                    const details = this.querySelector('.day-details');
+                                    const allDetails = document.querySelectorAll('.day-details');
+                                    
+                                    // Hide all other details
+                                    allDetails.forEach(d => {
+                                        if (d !== details) {
+                                            d.style.display = 'none';
+                                            d.parentElement.classList.remove('active');
+                                        }
+                                    });
+                                    
+                                    // Toggle this one
+                                    if (details.style.display === 'block') {
+                                        details.style.display = 'none';
+                                        this.classList.remove('active');
+                                    } else {
+                                        details.style.display = 'block';
+                                        this.classList.add('active');
+                                    }
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+            
+            // Add toggle functionality for collapsible sections
+            document.querySelectorAll('.year, .month, .week').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    if (e.target === this || e.target.classList.contains('toggle-icon')) {
+                        const icon = this.querySelector('.toggle-icon');
+                        const container = this.nextElementSibling;
+                        
+                        if (container.style.display === 'none') {
+                            container.style.display = 'block';
+                            icon.textContent = '▼';
+                        } else {
+                            container.style.display = 'none';
+                            icon.textContent = '►';
+                        }
+                    }
+                });
+            });
+        }
+        
+        function searchActivities() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm.trim() === '') return;
+            
+            // Reset UI
+            document.querySelectorAll('.day').forEach(day => {
+                day.style.display = 'none';
+                day.classList.remove('search-result');
+            });
+            
+            document.querySelectorAll('.year, .month, .week, .months-container, .weeks-container, .days-container').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            let hasResults = false;
+            
+            // Search through all activities
+            for (const year in timelineData) {
+                for (const month in timelineData[year]) {
+                    for (const week in timelineData[year][month]) {
+                        for (const day in timelineData[year][month][week]) {
+                            const activities = timelineData[year][month][week][day];
+                            let dayMatches = false;
+                            
+                            // Check if any activity matches search term
+                            activities.forEach(activity => {
+                                if (
+                                    activity.title.toLowerCase().includes(searchTerm) || 
+                                    activity.description.toLowerCase().includes(searchTerm) ||
+                                    activity.time.toLowerCase().includes(searchTerm)
+                                ) {
+                                    dayMatches = true;
+                                }
+                            });
+                            
+                            if (dayMatches) {
+                                // Show this day
+                                const dayElement = document.querySelector(`.day[data-date="${day}"]`);
+                                if (dayElement) {
+                                    dayElement.style.display = 'block';
+                                    dayElement.classList.add('search-result');
+                                    hasResults = true;
+                                    
+                                    // Show its parents
+                                    let parent = dayElement.parentElement;
+                                    while (parent) {
+                                        parent.style.display = 'block';
+                                        parent = parent.parentElement;
+                                    }
+                                    
+                                    // Show the year, month, and week divs
+                                    const yearDiv = document.querySelector(`.year:contains('${year}')`);
+                                    const monthDiv = document.querySelector(`.month:contains('${month}')`);
+                                    const weekDiv = document.querySelector(`.week:contains('${week}')`);
+                                    
+                                    if (yearDiv) yearDiv.style.display = 'block';
+                                    if (monthDiv) monthDiv.style.display = 'block';
+                                    if (weekDiv) weekDiv.style.display = 'block';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (!hasResults) {
+                alert('No activities found matching your search term.');
+                
+                // Reset the display
+                document.querySelectorAll('.year, .month, .week, .months-container, .weeks-container, .days-container, .day').forEach(el => {
+                    el.style.display = 'block';
+                });
+            }
+        }
+        
+        // Helper for selector :contains
+        jQuery.expr[':'].contains = function(a, i, m) {
+            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+        };
+    </script>
+</body>
+</html>
