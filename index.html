@@ -2,13 +2,13 @@ function generateTimeline() {
             const timelineElement = document.getElementById('timeline');
             timelineElement.innerHTML = ''; // Clear loading message
             
-            if (!window.timelineData || Object.keys(window.timelineData).length === 0) {
+            if (!timelineData || Object.keys(timelineData).length === 0) {
                 timelineElement.innerHTML = `<div class="loading">${translations[currentLang].loadingMessage}</div>`;
                 return;
             }
             
             // Generate years
-            Object.keys(window.timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
+            Object.keys(timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
                 const yearDiv = document.createElement('div');
                 yearDiv.className = 'year';
                 yearDiv.innerHTML = `<span class="toggle-icon">▼</span> ${year}`;
@@ -19,7 +19,7 @@ function generateTimeline() {
                 timelineElement.appendChild(monthsContainer);
                 
                 // Generate months
-                Object.keys(window.timelineData[year]).forEach(month => {
+                Object.keys(timelineData[year]).forEach(month => {
                     const monthDiv = document.createElement('div');
                     monthDiv.className = 'month';
                     monthDiv.innerHTML = `<span class="toggle-icon">▼</span> ${month}`;
@@ -30,7 +30,7 @@ function generateTimeline() {
                     monthsContainer.appendChild(weeksContainer);
                     
                     // Generate weeks
-                    Object.keys(window.timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
+                    Object.keys(timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
                         const weekDiv = document.createElement('div');
                         weekDiv.className = 'week';
                         weekDiv.innerHTML = `<span class="toggle-icon">▼</span> ${week}`;
@@ -41,33 +41,141 @@ function generateTimeline() {
                         weeksContainer.appendChild(daysContainer);
                         
                         // Generate days
-                        Object.keys(window.timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
-                            const activities = window.timelineData[year][month][week][day];
+                        Object.keys(timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
+                            const activities = timelineData[year][month][week][day];
                             const date = new Date(day);
                             
                             // Format date based on current language
                             let formattedDate;
-                            switch(currentLang) {
-                                case 'ro':
-                                    formattedDate = date.toLocaleDateString('ro-RO', { 
-                                        weekday: 'long', 
-                                        year: 'numeric', 
-                                        month: 'long', 
-                                        day: 'numeric' 
+                            try {
+                                switch(currentLang) {
+                                    case 'ro':
+                                        formattedDate = date.toLocaleDateString('ro-RO', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                        break;
+                                    case 'fr':
+                                        formattedDate = date.toLocaleDateString('fr-FR', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                        break;
+                                    default: // English
+                                        formattedDate = date.toLocaleDateString('en-US', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                }
+                            } catch (e) {
+                                // Fallback if date formatting fails
+                                formattedDate = day;
+                            }
+                            
+                            const dayDiv = document.createElement('div');
+                            dayDiv.className = 'day';
+                            dayDiv.dataset.date = day;
+                            dayDiv.textContent = `${formattedDate} (${activities.length} ${translations[currentLang].activities})`;
+                            daysContainer.appendChild(dayDiv);
+                            
+                            // Create the details container for this day
+                            const detailsDiv = document.createElement('div');
+                            detailsDiv.className = 'day-details';
+                            
+                            // Add activities to the details
+                            activities.forEach(activity => {
+                                const activityDiv = document.createElement('div');
+                                activityDiv.className = 'activity';
+                                
+                                const timeEl = document.createElement('div');
+                                timeEl.className = 'activity-time';
+                                timeEl.textContent = activity.time;
+                                activityDiv.appendChild(timeEl);
+                                
+                                const titleEl = document.createElement('div');
+                                titleEl.className = 'activity-title';
+                                titleEl.textContent = activity.title[currentLang] || activity.title.en; // Fallback to English
+                                activityDiv.appendChild(titleEl);
+                                
+                                const descEl = document.createElement('div');
+                                descEl.className = 'activity-description';
+                                descEl.textContent = activity.description[currentLang] || activity.description.en; // Fallback to English
+                                activityDiv.appendChild(descEl);
+                                
+                                // Add references
+                                if (activity.references && activity.references.length > 0) {
+                                    activity.references.forEach(ref => {
+                                        const refEl = document.createElement('div');
+                                        refEl.className = 'reference';
+                                        
+                                        const linkEl = document.createElement('a');
+                                        linkEl.href = ref.url;
+                                        linkEl.textContent = ref.text;
+                                        linkEl.target = '_blank';
+                                        
+                                        refEl.appendChild(linkEl);
+                                        activityDiv.appendChild(refEl);
                                     });
-                                    break;
-                                case 'fr':
-                                    formattedDate = date.toLocaleDateString('fr-FR', { 
-                                        weekday: 'long', 
-                                        year: 'numeric', 
-                                        month: 'long', 
-                                        day: 'numeric' 
+                                }
+                                
+                                detailsDiv.appendChild(activityDiv);
+                            });
+                            
+                            dayDiv.appendChild(detailsDiv);
+                            
+                            // Add click event
+                            dayDiv.addEventListener('click', function(e) {
+                                if (e.target.classList.contains('day') || e.target === this) {
+                                    const details = this.querySelector('.day-details');
+                                    const allDetails = document.querySelectorAll('.day-details');
+                                    
+                                    // Hide all other details
+                                    allDetails.forEach(d => {
+                                        if (d !== details) {
+                                            d.style.display = 'none';
+                                            d.parentElement.classList.remove('active');
+                                        }
                                     });
-                                    break;
-                                default: // English
-                                    formattedDate = date.toLocaleDateString('en-US', { 
-                                        weekday: 'long', 
-                                        year: 'numeric', 
+                                    
+                                    // Toggle this one
+                                    if (details.style.display === 'block') {
+                                        details.style.display = 'none';
+                                        this.classList.remove('active');
+                                    } else {
+                                        details.style.display = 'block';
+                                        this.classList.add('active');
+                                    }
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+            
+            // Add toggle functionality for collapsible sections
+            document.querySelectorAll('.year, .month, .week').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    if (e.target === this || e.target.classList.contains('toggle-icon')) {
+                        const icon = this.querySelector('.toggle-icon');
+                        const container = this.nextElementSibling;
+                        
+                        if (container.style.display === 'none') {
+                            container.style.display = 'block';
+                            icon.textContent = '▼';
+                        } else {
+                            container.style.display = 'none';
+                            icon.textContent = '►';
+                        }
+                    }
+                });
+            });
+        }
                                         month: 'long', 
                                         day: 'numeric' 
                                     });
@@ -459,113 +567,129 @@ function generateTimeline() {
             // Update HTML lang attribute
             document.documentElement.lang = lang;
             
-            // Update any visible dates or dynamic content
+            // Regenerate timeline with new language
             generateTimeline();
         }
         
-        // Load timeline data from JSON file
-        async function loadTimelineData() {
-            try {
-                // In a real application, this would be a server endpoint or JSON file
-                // For this demo, we'll create a Mock API response
-                return {
-                    "2025": {
-                        "May": {
-                            "Week 3 (May 15-21)": {
-                                "2025-05-20": [
-                                    {
-                                        "time": "09:30 AM", 
-                                        "title": {
-                                            "ro": "Comisia Senatului pentru Relații Externe",
-                                            "en": "Senate Committee on Foreign Relations",
-                                            "fr": "Commission du Sénat des Relations Étrangères"
-                                        }, 
-                                        "description": {
-                                            "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
-                                            "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
-                                            "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
-                                        },
-                                        "references": [
-                                            { "text": "Registrul Oficial al Senatului", "url": "#" },
-                                            { "text": "Acoperire C-SPAN", "url": "#" }
-                                        ]
-                                    },
-                                    {
-                                        "time": "02:00 PM", 
-                                        "title": {
-                                            "ro": "Vot în Plen: H.R. 3782",
-                                            "en": "Floor Vote: H.R. 3782",
-                                            "fr": "Vote en Séance Plénière: H.R. 3782"
-                                        }, 
-                                        "description": {
-                                            "ro": "A votat 'Da' pentru Amendamentul la Legea privind Dezvoltarea Infrastructurii și Locurile de Muncă",
-                                            "en": "Voted 'Yes' on the Infrastructure Development and Jobs Act Amendment",
-                                            "fr": "A voté 'Oui' sur l'Amendement à la Loi sur le Développement des Infrastructures et l'Emploi"
-                                        },
-                                        "references": [
-                                            { "text": "Registrul de Vot al Congresului", "url": "#" }
-                                        ]
-                                    },
-                                    {
-                                        "time": "04:30 PM", 
-                                        "title": {
-                                            "ro": "Conferință de Presă",
-                                            "en": "Press Conference",
-                                            "fr": "Conférence de Presse"
-                                        }, 
-                                        "description": {
-                                            "ro": "A susținut o conferință de presă comună cu Senatorul Thompson discutând inițiativa legislativă bipartizană privind clima.",
-                                            "en": "Held joint press conference with Senator Thompson discussing bipartisan climate legislation initiative.",
-                                            "fr": "A tenu une conférence de presse conjointe avec le Sénateur Thompson discutant de l'initiative législative bipartisane sur le climat."
-                                        },
-                                        "references": [
-                                            { "text": "Comunicat de Presă Oficial", "url": "#" },
-                                            { "text": "Acoperire Washington Post", "url": "#" }
-                                        ]
-                                    }
-                                ],
-                                "2025-05-19": [
-                                    {
-                                        "time": "10:00 AM", 
-                                        "title": {
-                                            "ro": "Întâlnire cu Alegătorii",
-                                            "en": "Constituent Meeting",
-                                            "fr": "Réunion avec les Électeurs"
-                                        }, 
-                                        "description": {
-                                            "ro": "S-a întâlnit cu reprezentanți ai Asociației Profesorilor de Stat cu privire la prioritățile de finanțare a educației.",
-                                            "en": "Met with representatives from State Teachers Association regarding education funding priorities.",
-                                            "fr": "A rencontré des représentants de l'Association des Enseignants d'État concernant les priorités de financement de l'éducation."
-                                        },
-                                        "references": [
-                                            { "text": "Programul Săptămânal al Senatorului", "url": "#" }
-                                        ]
-                                    },
-                                    {
-                                        "time": "01:00 PM", 
-                                        "title": {
-                                            "ro": "Grup de Lucru al Comisiei pentru Buget",
-                                            "en": "Budget Committee Working Group",
-                                            "fr": "Groupe de Travail de la Commission du Budget"
-                                        }, 
-                                        "description": {
-                                            "ro": "A participat la sesiunea cu ușile închise privind viitoarele alocări fiscale.",
-                                            "en": "Participated in closed-door session on upcoming fiscal appropriations.",
-                                            "fr": "A participé à une session à huis clos sur les prochaines affectations fiscales."
-                                        },
-                                        "references": [
-                                            { "text": "Procesul Verbal al Comisiei", "url": "#" }
-                                        ]
-                                    }
+        // JSON data - this simulates loading from an external file
+        const timelineData = {
+            "2025": {
+                "May": {
+                    "Week 3 (May 15-21)": {
+                        "2025-05-20": [
+                            {
+                                "time": "09:30 AM", 
+                                "title": {
+                                    "ro": "Comisia Senatului pentru Relații Externe",
+                                    "en": "Senate Committee on Foreign Relations",
+                                    "fr": "Commission du Sénat des Relations Étrangères"
+                                }, 
+                                "description": {
+                                    "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
+                                    "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
+                                    "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+                                },
+                                "references": [
+                                    { "text": "Registrul Oficial al Senatului", "url": "#" },
+                                    { "text": "Acoperire C-SPAN", "url": "#" }
+                                ]
+                            },
+                            {
+                                "time": "02:00 PM", 
+                                "title": {
+                                    "ro": "Vot în Plen: H.R. 3782",
+                                    "en": "Floor Vote: H.R. 3782",
+                                    "fr": "Vote en Séance Plénière: H.R. 3782"
+                                }, 
+                                "description": {
+                                    "ro": "A votat 'Da' pentru Amendamentul la Legea privind Dezvoltarea Infrastructurii și Locurile de Muncă",
+                                    "en": "Voted 'Yes' on the Infrastructure Development and Jobs Act Amendment",
+                                    "fr": "A voté 'Oui' sur l'Amendement à la Loi sur le Développement des Infrastructures et l'Emploi"
+                                },
+                                "references": [
+                                    { "text": "Registrul de Vot al Congresului", "url": "#" }
+                                ]
+                            },
+                            {
+                                "time": "04:30 PM", 
+                                "title": {
+                                    "ro": "Conferință de Presă",
+                                    "en": "Press Conference",
+                                    "fr": "Conférence de Presse"
+                                }, 
+                                "description": {
+                                    "ro": "A susținut o conferință de presă comună cu Senatorul Thompson discutând inițiativa legislativă bipartizană privind clima.",
+                                    "en": "Held joint press conference with Senator Thompson discussing bipartisan climate legislation initiative.",
+                                    "fr": "A tenu une conférence de presse conjointe avec le Sénateur Thompson discutant de l'initiative législative bipartisane sur le climat."
+                                },
+                                "references": [
+                                    { "text": "Comunicat de Presă Oficial", "url": "#" },
+                                    { "text": "Acoperire Washington Post", "url": "#" }
                                 ]
                             }
-                        }
+                        ],
+                        "2025-05-19": [
+                            {
+                                "time": "10:00 AM", 
+                                "title": {
+                                    "ro": "Întâlnire cu Alegătorii",
+                                    "en": "Constituent Meeting",
+                                    "fr": "Réunion avec les Électeurs"
+                                }, 
+                                "description": {
+                                    "ro": "S-a întâlnit cu reprezentanți ai Asociației Profesorilor de Stat cu privire la prioritățile de finanțare a educației.",
+                                    "en": "Met with representatives from State Teachers Association regarding education funding priorities.",
+                                    "fr": "A rencontré des représentants de l'Association des Enseignants d'État concernant les priorités de financement de l'éducation."
+                                },
+                                "references": [
+                                    { "text": "Programul Săptămânal al Senatorului", "url": "#" }
+                                ]
+                            },
+                            {
+                                "time": "01:00 PM", 
+                                "title": {
+                                    "ro": "Grup de Lucru al Comisiei pentru Buget",
+                                    "en": "Budget Committee Working Group",
+                                    "fr": "Groupe de Travail de la Commission du Budget"
+                                }, 
+                                "description": {
+                                    "ro": "A participat la sesiunea cu ușile închise privind viitoarele alocări fiscale.",
+                                    "en": "Participated in closed-door session on upcoming fiscal appropriations.",
+                                    "fr": "A participé à une session à huis clos sur les prochaines affectations fiscales."
+                                },
+                                "references": [
+                                    { "text": "Procesul Verbal al Comisiei", "url": "#" }
+                                ]
+                            }
+                        ],
+                        "2025-05-18": [
+                            {
+                                "time": "All Day", 
+                                "title": {
+                                    "ro": "Vizită în District",
+                                    "en": "District Visit",
+                                    "fr": "Visite du District"
+                                }, 
+                                "description": {
+                                    "ro": "A vizitat zonele afectate de inundații din județele de nord și s-a întâlnit cu oficialii locali despre asistența federală pentru dezastre.",
+                                    "en": "Toured flood-damaged areas in northern counties and met with local officials about federal disaster assistance.",
+                                    "fr": "A visité les zones inondées dans les comtés du nord et a rencontré les responsables locaux au sujet de l'aide fédérale aux sinistrés."
+                                },
+                                "references": [
+                                    { "text": "Acoperire Știri Locale", "url": "#" },
+                                    { "text": "Postare Instagram", "url": "#" }
+                                ]
+                            }
+                        ]
                     }
-                };
-            } catch (error) {
-                console.error("Failed to load timeline data:", error);
-                return {};
+                }
             }
+        };
+        
+        // Function to load timeline data (would fetch from JSON in real implementation)
+        async function loadTimelineData() {
+            // In a real app, this would be replaced with a fetch call to your JSON file
+            return timelineData;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -765,11 +889,11 @@ function generateTimeline() {
             let hasResults = false;
             
             // Search through all activities
-            for (const year in window.timelineData) {
-                for (const month in window.timelineData[year]) {
-                    for (const week in window.timelineData[year][month]) {
-                        for (const day in window.timelineData[year][month][week]) {
-                            const activities = window.timelineData[year][month][week][day];
+            for (const year in timelineData) {
+                for (const month in timelineData[year]) {
+                    for (const week in timelineData[year][month]) {
+                        for (const day in timelineData[year][month][week]) {
+                            const activities = timelineData[year][month][week][day];
                             let dayMatches = false;
                             
                             // Check if any activity matches search term
@@ -801,14 +925,24 @@ function generateTimeline() {
                                         parent = parent.parentElement;
                                     }
                                     
-                                    // Show the year, month, and week divs
-                                    const yearDiv = document.querySelector(`.year:contains('${year}')`);
-                                    const monthDiv = document.querySelector(`.month:contains('${month}')`);
-                                    const weekDiv = document.querySelector(`.week:contains('${week}')`);
+                                    // Find and show corresponding year, month, and week elements
+                                    document.querySelectorAll('.year').forEach(yearEl => {
+                                        if (yearEl.textContent.includes(year)) {
+                                            yearEl.style.display = 'block';
+                                        }
+                                    });
                                     
-                                    if (yearDiv) yearDiv.style.display = 'block';
-                                    if (monthDiv) monthDiv.style.display = 'block';
-                                    if (weekDiv) weekDiv.style.display = 'block';
+                                    document.querySelectorAll('.month').forEach(monthEl => {
+                                        if (monthEl.textContent.includes(month)) {
+                                            monthEl.style.display = 'block';
+                                        }
+                                    });
+                                    
+                                    document.querySelectorAll('.week').forEach(weekEl => {
+                                        if (weekEl.textContent.includes(week)) {
+                                            weekEl.style.display = 'block';
+                                        }
+                                    });
                                 }
                             }
                         }
@@ -826,10 +960,32 @@ function generateTimeline() {
             }
         }
         
-        // Helper for selector :contains
-        jQuery.expr[':'].contains = function(a, i, m) {
-            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language selector
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Set language
+                    setLanguage(this.getAttribute('data-lang'));
+                });
+            });
+            
+            // Generate timeline with initial data
+            generateTimeline();
+            
+            // Setup search functionality
+            document.getElementById('searchButton').addEventListener('click', searchActivities);
+            document.getElementById('searchInput').addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    searchActivities();
+                }
+            });
+        });
     </script>
 </body>
 </html>
