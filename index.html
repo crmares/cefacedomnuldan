@@ -136,123 +136,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             cursor: pointer;
-            <!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jurnal de Activitate Politică</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f7f9fc;
-        }
-        
-        header {
-            background-color: #1a3a6e;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            margin: 0;
-        }
-        
-        .language-selector {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-        }
-        
-        .lang-btn {
-            padding: 5px 10px;
-            margin-left: 5px;
-            background-color: #eee;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .lang-btn.active {
-            background-color: #1a3a6e;
-            color: white;
-            border-color: #1a3a6e;
-        }
-        
-        .search-container {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .search-container input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .search-container button {
-            padding: 10px 15px;
-            background-color: #1a3a6e;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .timeline {
-            height: 600px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            padding: 10px;
-        }
-        
-        .year, .month, .week {
-            cursor: pointer;
-            padding: 8px 10px;
-            margin: 5px 0;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        
-        .year {
-            background-color: #1a3a6e;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .month {
-            background-color: #4a6fa5;
-            color: white;
-            margin-left: 20px;
-        }
-        
-        .week {
-            background-color: #8faad1;
-            color: white;
-            margin-left: 40px;
-        }
-        
-        .day {
-            padding: 10px;
-            margin: 5px 0 5px 60px;
-            background-color: #edf2fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
             transition: all 0.3s;
         }
         
@@ -294,10 +177,12 @@
         .activity-title {
             font-weight: bold;
             margin: 5px 0;
+            font-size: 1.1rem;
         }
         
         .activity-description {
             margin-bottom: 10px;
+            line-height: 1.5;
         }
         
         .reference {
@@ -308,6 +193,7 @@
             border-radius: 4px;
             display: inline-block;
             margin-top: 5px;
+            margin-right: 5px;
         }
         
         .reference a {
@@ -317,10 +203,6 @@
         
         .reference a:hover {
             text-decoration: underline;
-        }
-        
-        .collapsed {
-            display: none;
         }
         
         .toggle-icon {
@@ -333,6 +215,7 @@
             text-align: center;
             padding: 20px;
             color: #666;
+            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
@@ -355,25 +238,31 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1 id="headerTitle">Senatorul James Mitchell: Jurnal de Activitate</h1>
-        <p id="headerSubtitle">Monitorizarea activităților oficiale, voturi, apariții publice și declarații</p>
-    </header>
-    
-    <div class="language-selector">
-        <button class="lang-btn active" data-lang="ro">Română</button>
-        <button class="lang-btn" data-lang="en">English</button>
-        <button class="lang-btn" data-lang="fr">Français</button>
-    </div>
-    
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Caută activități, subiecte sau locații...">
-        <button id="searchButton">Caută</button>
-    </div>
-    
-    <div class="timeline" id="timeline">
-        <!-- Timeline content will be dynamically generated -->
-        <div class="loading" id="loadingMessage">Se încarcă datele...</div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 id="headerTitle">Senatorul James Mitchell: Jurnal de Activitate</h1>
+                <p id="headerSubtitle">Monitorizarea activităților oficiale, voturi, apariții publice și declarații</p>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="ro">Română</button>
+                <button class="lang-btn" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="fr">Français</button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Caută activități, subiecte sau locații...">
+                <button id="searchButton">Caută</button>
+            </div>
+            
+            <div class="timeline" id="timeline">
+                <!-- Timeline content will be dynamically generated -->
+                <div class="loading" id="loadingMessage">Se încarcă datele...</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -386,7 +275,8 @@
                 "searchButton": "Caută",
                 "loadingMessage": "Se încarcă datele...",
                 "noResults": "Nu s-au găsit activități care să corespundă termenului de căutare.",
-                "activities": "activități"
+                "activities": "activități",
+                "loadError": "Eroare la încărcarea datelor:"
             },
             "en": {
                 "headerTitle": "Senator James Mitchell: Activity Journal",
@@ -395,7 +285,8 @@
                 "searchButton": "Search",
                 "loadingMessage": "Loading timeline data...",
                 "noResults": "No activities found matching your search term.",
-                "activities": "activities"
+                "activities": "activities",
+                "loadError": "Error loading data:"
             },
             "fr": {
                 "headerTitle": "Sénateur James Mitchell: Journal d'Activité",
@@ -404,127 +295,14 @@
                 "searchButton": "Rechercher",
                 "loadingMessage": "Chargement des données...",
                 "noResults": "Aucune activité trouvée correspondant à votre recherche.",
-                "activities": "activités"
+                "activities": "activités",
+                "loadError": "Erreur de chargement des données:"
             }
         };
         
         // Current language
         let currentLang = "ro";
-        
-        // Timeline data - static data for this demo
-        const timelineData = {
-            "2025": {
-                "May": {
-                    "Week 3 (May 15-21)": {
-                        "2025-05-20": [
-                            {
-                                "time": "09:30 AM", 
-                                "title": {
-                                    "ro": "Comisia Senatului pentru Relații Externe",
-                                    "en": "Senate Committee on Foreign Relations",
-                                    "fr": "Commission du Sénat des Relations Étrangères"
-                                }, 
-                                "description": {
-                                    "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
-                                    "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
-                                    "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
-                                },
-                                "references": [
-                                    { "text": "Registrul Oficial al Senatului", "url": "#" },
-                                    { "text": "Acoperire C-SPAN", "url": "#" }
-                                ]
-                            },
-                            {
-                                "time": "02:00 PM", 
-                                "title": {
-                                    "ro": "Vot în Plen: H.R. 3782",
-                                    "en": "Floor Vote: H.R. 3782",
-                                    "fr": "Vote en Séance Plénière: H.R. 3782"
-                                }, 
-                                "description": {
-                                    "ro": "A votat 'Da' pentru Amendamentul la Legea privind Dezvoltarea Infrastructurii și Locurile de Muncă",
-                                    "en": "Voted 'Yes' on the Infrastructure Development and Jobs Act Amendment",
-                                    "fr": "A voté 'Oui' sur l'Amendement à la Loi sur le Développement des Infrastructures et l'Emploi"
-                                },
-                                "references": [
-                                    { "text": "Registrul de Vot al Congresului", "url": "#" }
-                                ]
-                            },
-                            {
-                                "time": "04:30 PM", 
-                                "title": {
-                                    "ro": "Conferință de Presă",
-                                    "en": "Press Conference",
-                                    "fr": "Conférence de Presse"
-                                }, 
-                                "description": {
-                                    "ro": "A susținut o conferință de presă comună cu Senatorul Thompson discutând inițiativa legislativă bipartizană privind clima.",
-                                    "en": "Held joint press conference with Senator Thompson discussing bipartisan climate legislation initiative.",
-                                    "fr": "A tenu une conférence de presse conjointe avec le Sénateur Thompson discutant de l'initiative législative bipartisane sur le climat."
-                                },
-                                "references": [
-                                    { "text": "Comunicat de Presă Oficial", "url": "#" },
-                                    { "text": "Acoperire Washington Post", "url": "#" }
-                                ]
-                            }
-                        ],
-                        "2025-05-19": [
-                            {
-                                "time": "10:00 AM", 
-                                "title": {
-                                    "ro": "Întâlnire cu Alegătorii",
-                                    "en": "Constituent Meeting",
-                                    "fr": "Réunion avec les Électeurs"
-                                }, 
-                                "description": {
-                                    "ro": "S-a întâlnit cu reprezentanți ai Asociației Profesorilor de Stat cu privire la prioritățile de finanțare a educației.",
-                                    "en": "Met with representatives from State Teachers Association regarding education funding priorities.",
-                                    "fr": "A rencontré des représentants de l'Association des Enseignants d'État concernant les priorités de financement de l'éducation."
-                                },
-                                "references": [
-                                    { "text": "Programul Săptămânal al Senatorului", "url": "#" }
-                                ]
-                            },
-                            {
-                                "time": "01:00 PM", 
-                                "title": {
-                                    "ro": "Grup de Lucru al Comisiei pentru Buget",
-                                    "en": "Budget Committee Working Group",
-                                    "fr": "Groupe de Travail de la Commission du Budget"
-                                }, 
-                                "description": {
-                                    "ro": "A participat la sesiunea cu ușile închise privind viitoarele alocări fiscale.",
-                                    "en": "Participated in closed-door session on upcoming fiscal appropriations.",
-                                    "fr": "A participé à une session à huis clos sur les prochaines affectations fiscales."
-                                },
-                                "references": [
-                                    { "text": "Procesul Verbal al Comisiei", "url": "#" }
-                                ]
-                            }
-                        ],
-                        "2025-05-18": [
-                            {
-                                "time": "All Day", 
-                                "title": {
-                                    "ro": "Vizită în District",
-                                    "en": "District Visit",
-                                    "fr": "Visite du District"
-                                }, 
-                                "description": {
-                                    "ro": "A vizitat zonele afectate de inundații din județele de nord și s-a întâlnit cu oficialii locali despre asistența federală pentru dezastre.",
-                                    "en": "Toured flood-damaged areas in northern counties and met with local officials about federal disaster assistance.",
-                                    "fr": "A visité les zones inondées dans les comtés du nord et a rencontré les responsables locaux au sujet de l'aide fédérale aux sinistrés."
-                                },
-                                "references": [
-                                    { "text": "Acoperire Știri Locale", "url": "#" },
-                                    { "text": "Postare Instagram", "url": "#" }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            }
-        };
+        let timelineData = null;
         
         // Function to set language
         function setLanguage(lang) {
@@ -541,7 +319,32 @@
             document.documentElement.lang = lang;
             
             // Regenerate timeline with new language
-            generateTimeline();
+            if (timelineData) {
+                generateTimeline();
+            }
+        }
+        
+        // Function to load timeline data from JSON file
+        async function loadTimelineData() {
+            try {
+                console.log("Attempting to load timeline data from JSON file...");
+                // For GitHub Pages deployment, we need to ensure the path is correct
+                const response = await fetch('./timeline-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log("Timeline data loaded successfully:", Object.keys(data));
+                return data;
+            } catch (error) {
+                console.error("Error loading timeline data:", error);
+                // Display error in timeline container
+                document.getElementById('timeline').innerHTML = 
+                    `<div class="loading" style="color: red;">${translations[currentLang].loadError} ${error.message}. Check console for details.</div>`;
+                
+                // Return empty object as fallback
+                return {};
+            }
         }
         
         // Function to generate timeline
@@ -676,6 +479,9 @@
                                 
                                 // Add references
                                 if (activity.references && activity.references.length > 0) {
+                                    const refsContainer = document.createElement('div');
+                                    refsContainer.className = 'references-container';
+                                    
                                     activity.references.forEach(ref => {
                                         const refEl = document.createElement('div');
                                         refEl.className = 'reference';
@@ -686,8 +492,10 @@
                                         linkEl.target = '_blank';
                                         
                                         refEl.appendChild(linkEl);
-                                        activityDiv.appendChild(refEl);
+                                        refsContainer.appendChild(refEl);
                                     });
+                                    
+                                    activityDiv.appendChild(refsContainer);
                                 }
                                 
                                 detailsDiv.appendChild(activityDiv);
@@ -696,24 +504,27 @@
                             dayDiv.appendChild(detailsDiv);
                             
                             // Add click event to expand/collapse details
-                            dayDiv.addEventListener('click', function() {
-                                const details = this.querySelector('.day-details');
-                                
-                                // Hide all other details
-                                document.querySelectorAll('.day-details').forEach(d => {
-                                    if (d !== details) {
-                                        d.style.display = 'none';
-                                        d.parentElement.classList.remove('active');
+                            dayDiv.addEventListener('click', function(e) {
+                                // Only handle click if it's directly on the day element
+                                if (e.target === this || e.target.classList.contains('day')) {
+                                    const details = this.querySelector('.day-details');
+                                    
+                                    // Hide all other details
+                                    document.querySelectorAll('.day-details').forEach(d => {
+                                        if (d !== details) {
+                                            d.style.display = 'none';
+                                            d.parentElement.classList.remove('active');
+                                        }
+                                    });
+                                    
+                                    // Toggle this one
+                                    if (details.style.display === 'block') {
+                                        details.style.display = 'none';
+                                        this.classList.remove('active');
+                                    } else {
+                                        details.style.display = 'block';
+                                        this.classList.add('active');
                                     }
-                                });
-                                
-                                // Toggle this one
-                                if (details.style.display === 'block') {
-                                    details.style.display = 'none';
-                                    this.classList.remove('active');
-                                } else {
-                                    details.style.display = 'block';
-                                    this.classList.add('active');
                                 }
                             });
                         });
@@ -756,6 +567,10 @@
             });
             
             document.querySelectorAll('.months-container, .weeks-container, .days-container').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.year, .month, .week').forEach(el => {
                 el.style.display = 'none';
             });
             
@@ -851,7 +666,89 @@
         }
         
         // Initialize application when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Show loading message
+                document.getElementById('loadingMessage').textContent = translations[currentLang].loadingMessage;
+                
+                // Load data from JSON file
+                console.log("Starting application, loading JSON data...");
+                timelineData = await loadTimelineData();
+                
+                // Check if data was loaded successfully
+                if (timelineData && Object.keys(timelineData).length > 0) {
+                    console.log("JSON data loaded successfully, generating timeline");
+                    // Initialize timeline
+                    generateTimeline();
+                } else {
+                    console.warn("JSON data load failed or empty, loading from embedded fallbackData");
+                    alert("Could not load timeline-data.json. Please make sure the file exists in the same directory as the HTML file.");
+                    // Use fallback dummy data
+                    timelineData = {
+                        "2025": {
+                            "May": {
+                                "Week 3 (May 15-21)": {
+                                    "2025-05-20": [
+                                        {
+                                            "time": "09:30 AM", 
+                                            "title": {
+                                                "ro": "Comisia Senatului pentru Relații Externe",
+                                                "en": "Senate Committee on Foreign Relations",
+                                                "fr": "Commission du Sénat des Relations Étrangères"
+                                            }, 
+                                            "description": {
+                                                "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
+                                                "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
+                                                "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+                                            },
+                                            "references": [
+                                                { "text": "Registrul Oficial al Senatului", "url": "#" },
+                                                { "text": "Acoperire C-SPAN", "url": "#" }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    };
+                    generateTimeline();
+                }
+            } catch (error) {
+                console.error("Error initializing application:", error);
+                document.getElementById('timeline').innerHTML = 
+                    `<div class="loading" style="color: red;">${translations[currentLang].loadError} ${error.message}</div>`;
+                
+                // Fall back to embedded data
+                timelineData = {
+                    "2025": {
+                        "May": {
+                            "Week 3 (May 15-21)": {
+                                "2025-05-20": [
+                                    {
+                                        "time": "09:30 AM", 
+                                        "title": {
+                                            "ro": "Comisia Senatului pentru Relații Externe",
+                                            "en": "Senate Committee on Foreign Relations",
+                                            "fr": "Commission du Sénat des Relations Étrangères"
+                                        }, 
+                                        "description": {
+                                            "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
+                                            "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
+                                            "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+                                        },
+                                        "references": [
+                                            { "text": "Registrul Oficial al Senatului", "url": "#" },
+                                            { "text": "Acoperire C-SPAN", "url": "#" }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                };
+                generateTimeline();
+            }
+            
             // Setup language switcher
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -863,9 +760,6 @@
                     setLanguage(this.getAttribute('data-lang'));
                 });
             });
-            
-            // Initialize timeline
-            generateTimeline();
             
             // Setup search
             document.getElementById('searchButton').addEventListener('click', searchActivities);
