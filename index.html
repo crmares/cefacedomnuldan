@@ -1,284 +1,4 @@
-function generateTimeline() {
-            const timelineElement = document.getElementById('timeline');
-            timelineElement.innerHTML = ''; // Clear loading message
-            
-            if (!timelineData || Object.keys(timelineData).length === 0) {
-                timelineElement.innerHTML = `<div class="loading">${translations[currentLang].loadingMessage}</div>`;
-                return;
-            }
-            
-            // Generate years
-            Object.keys(timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
-                const yearDiv = document.createElement('div');
-                yearDiv.className = 'year';
-                yearDiv.innerHTML = `<span class="toggle-icon">▼</span> ${year}`;
-                timelineElement.appendChild(yearDiv);
-                
-                const monthsContainer = document.createElement('div');
-                monthsContainer.className = 'months-container';
-                timelineElement.appendChild(monthsContainer);
-                
-                // Generate months
-                Object.keys(timelineData[year]).forEach(month => {
-                    const monthDiv = document.createElement('div');
-                    monthDiv.className = 'month';
-                    monthDiv.innerHTML = `<span class="toggle-icon">▼</span> ${month}`;
-                    monthsContainer.appendChild(monthDiv);
-                    
-                    const weeksContainer = document.createElement('div');
-                    weeksContainer.className = 'weeks-container';
-                    monthsContainer.appendChild(weeksContainer);
-                    
-                    // Generate weeks
-                    Object.keys(timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
-                        const weekDiv = document.createElement('div');
-                        weekDiv.className = 'week';
-                        weekDiv.innerHTML = `<span class="toggle-icon">▼</span> ${week}`;
-                        weeksContainer.appendChild(weekDiv);
-                        
-                        const daysContainer = document.createElement('div');
-                        daysContainer.className = 'days-container';
-                        weeksContainer.appendChild(daysContainer);
-                        
-                        // Generate days
-                        Object.keys(timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
-                            const activities = timelineData[year][month][week][day];
-                            const date = new Date(day);
-                            
-                            // Format date based on current language
-                            let formattedDate;
-                            try {
-                                switch(currentLang) {
-                                    case 'ro':
-                                        formattedDate = date.toLocaleDateString('ro-RO', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                        break;
-                                    case 'fr':
-                                        formattedDate = date.toLocaleDateString('fr-FR', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                        break;
-                                    default: // English
-                                        formattedDate = date.toLocaleDateString('en-US', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                }
-                            } catch (e) {
-                                // Fallback if date formatting fails
-                                formattedDate = day;
-                            }
-                            
-                            const dayDiv = document.createElement('div');
-                            dayDiv.className = 'day';
-                            dayDiv.dataset.date = day;
-                            dayDiv.textContent = `${formattedDate} (${activities.length} ${translations[currentLang].activities})`;
-                            daysContainer.appendChild(dayDiv);
-                            
-                            // Create the details container for this day
-                            const detailsDiv = document.createElement('div');
-                            detailsDiv.className = 'day-details';
-                            
-                            // Add activities to the details
-                            activities.forEach(activity => {
-                                const activityDiv = document.createElement('div');
-                                activityDiv.className = 'activity';
-                                
-                                const timeEl = document.createElement('div');
-                                timeEl.className = 'activity-time';
-                                timeEl.textContent = activity.time;
-                                activityDiv.appendChild(timeEl);
-                                
-                                const titleEl = document.createElement('div');
-                                titleEl.className = 'activity-title';
-                                titleEl.textContent = activity.title[currentLang] || activity.title.en; // Fallback to English
-                                activityDiv.appendChild(titleEl);
-                                
-                                const descEl = document.createElement('div');
-                                descEl.className = 'activity-description';
-                                descEl.textContent = activity.description[currentLang] || activity.description.en; // Fallback to English
-                                activityDiv.appendChild(descEl);
-                                
-                                // Add references
-                                if (activity.references && activity.references.length > 0) {
-                                    activity.references.forEach(ref => {
-                                        const refEl = document.createElement('div');
-                                        refEl.className = 'reference';
-                                        
-                                        const linkEl = document.createElement('a');
-                                        linkEl.href = ref.url;
-                                        linkEl.textContent = ref.text;
-                                        linkEl.target = '_blank';
-                                        
-                                        refEl.appendChild(linkEl);
-                                        activityDiv.appendChild(refEl);
-                                    });
-                                }
-                                
-                                detailsDiv.appendChild(activityDiv);
-                            });
-                            
-                            dayDiv.appendChild(detailsDiv);
-                            
-                            // Add click event
-                            dayDiv.addEventListener('click', function(e) {
-                                if (e.target.classList.contains('day') || e.target === this) {
-                                    const details = this.querySelector('.day-details');
-                                    const allDetails = document.querySelectorAll('.day-details');
-                                    
-                                    // Hide all other details
-                                    allDetails.forEach(d => {
-                                        if (d !== details) {
-                                            d.style.display = 'none';
-                                            d.parentElement.classList.remove('active');
-                                        }
-                                    });
-                                    
-                                    // Toggle this one
-                                    if (details.style.display === 'block') {
-                                        details.style.display = 'none';
-                                        this.classList.remove('active');
-                                    } else {
-                                        details.style.display = 'block';
-                                        this.classList.add('active');
-                                    }
-                                }
-                            });
-                        });
-                    });
-                });
-            });
-            
-            // Add toggle functionality for collapsible sections
-            document.querySelectorAll('.year, .month, .week').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    if (e.target === this || e.target.classList.contains('toggle-icon')) {
-                        const icon = this.querySelector('.toggle-icon');
-                        const container = this.nextElementSibling;
-                        
-                        if (container.style.display === 'none') {
-                            container.style.display = 'block';
-                            icon.textContent = '▼';
-                        } else {
-                            container.style.display = 'none';
-                            icon.textContent = '►';
-                        }
-                    }
-                });
-            });
-        }
-                                        month: 'long', 
-                                        day: 'numeric' 
-                                    });
-                            }
-                            
-                            const dayDiv = document.createElement('div');
-                            dayDiv.className = 'day';
-                            dayDiv.dataset.date = day;
-                            dayDiv.textContent = `${formattedDate} (${activities.length} ${translations[currentLang].activities})`;
-                            daysContainer.appendChild(dayDiv);
-                            
-                            // Create the details container for this day
-                            const detailsDiv = document.createElement('div');
-                            detailsDiv.className = 'day-details';
-                            
-                            // Add activities to the details
-                            activities.forEach(activity => {
-                                const activityDiv = document.createElement('div');
-                                activityDiv.className = 'activity';
-                                
-                                const timeEl = document.createElement('div');
-                                timeEl.className = 'activity-time';
-                                timeEl.textContent = activity.time;
-                                activityDiv.appendChild(timeEl);
-                                
-                                const titleEl = document.createElement('div');
-                                titleEl.className = 'activity-title';
-                                titleEl.textContent = activity.title[currentLang] || activity.title.en; // Fallback to English
-                                activityDiv.appendChild(titleEl);
-                                
-                                const descEl = document.createElement('div');
-                                descEl.className = 'activity-description';
-                                descEl.textContent = activity.description[currentLang] || activity.description.en; // Fallback to English
-                                activityDiv.appendChild(descEl);
-                                
-                                // Add references
-                                if (activity.references && activity.references.length > 0) {
-                                    activity.references.forEach(ref => {
-                                        const refEl = document.createElement('div');
-                                        refEl.className = 'reference';
-                                        
-                                        const linkEl = document.createElement('a');
-                                        linkEl.href = ref.url;
-                                        linkEl.textContent = ref.text;
-                                        linkEl.target = '_blank';
-                                        
-                                        refEl.appendChild(linkEl);
-                                        activityDiv.appendChild(refEl);
-                                    });
-                                }
-                                
-                                detailsDiv.appendChild(activityDiv);
-                            });
-                            
-                            dayDiv.appendChild(detailsDiv);
-                            
-                            // Add click event
-                            dayDiv.addEventListener('click', function(e) {
-                                if (e.target.classList.contains('day')) {
-                                    const details = this.querySelector('.day-details');
-                                    const allDetails = document.querySelectorAll('.day-details');
-                                    
-                                    // Hide all other details
-                                    allDetails.forEach(d => {
-                                        if (d !== details) {
-                                            d.style.display = 'none';
-                                            d.parentElement.classList.remove('active');
-                                        }
-                                    });
-                                    
-                                    // Toggle this one
-                                    if (details.style.display === 'block') {
-                                        details.style.display = 'none';
-                                        this.classList.remove('active');
-                                    } else {
-                                        details.style.display = 'block';
-                                        this.classList.add('active');
-                                    }
-                                }
-                            });
-                        });
-                    });
-                });
-            });
-            
-            // Add toggle functionality for collapsible sections
-            document.querySelectorAll('.year, .month, .week').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    if (e.target === this || e.target.classList.contains('toggle-icon')) {
-                        const icon = this.querySelector('.toggle-icon');
-                        const container = this.nextElementSibling;
-                        
-                        if (container.style.display === 'none') {
-                            container.style.display = 'block';
-                            icon.textContent = '▼';
-                        } else {
-                            container.style.display = 'none';
-                            icon.textContent = '►';
-                        }
-                    }
-                });
-            });
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
@@ -553,25 +273,7 @@ function generateTimeline() {
         // Current language
         let currentLang = "ro";
         
-        // Function to set language
-        function setLanguage(lang) {
-            currentLang = lang;
-            
-            // Update UI elements
-            document.getElementById("headerTitle").textContent = translations[lang].headerTitle;
-            document.getElementById("headerSubtitle").textContent = translations[lang].headerSubtitle;
-            document.getElementById("searchInput").placeholder = translations[lang].searchPlaceholder;
-            document.getElementById("searchButton").textContent = translations[lang].searchButton;
-            document.getElementById("loadingMessage").textContent = translations[lang].loadingMessage;
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-            
-            // Regenerate timeline with new language
-            generateTimeline();
-        }
-        
-        // JSON data - this simulates loading from an external file
+        // Timeline data - static data for this demo
         const timelineData = {
             "2025": {
                 "May": {
@@ -686,78 +388,70 @@ function generateTimeline() {
             }
         };
         
-        // Function to load timeline data (would fetch from JSON in real implementation)
-        async function loadTimelineData() {
-            // In a real app, this would be replaced with a fetch call to your JSON file
-            return timelineData;
+        // Function to set language
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update UI elements
+            document.getElementById("headerTitle").textContent = translations[lang].headerTitle;
+            document.getElementById("headerSubtitle").textContent = translations[lang].headerSubtitle;
+            document.getElementById("searchInput").placeholder = translations[lang].searchPlaceholder;
+            document.getElementById("searchButton").textContent = translations[lang].searchButton;
+            document.getElementById("loadingMessage").textContent = translations[lang].loadingMessage;
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Regenerate timeline with new language
+            generateTimeline();
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize language selector
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Set language
-                    setLanguage(this.getAttribute('data-lang'));
-                });
-            });
-            
-            // Load data and generate timeline
-            loadTimelineData().then(data => {
-                window.timelineData = data;
-                generateTimeline();
-            });
-            
-            document.getElementById('searchButton').addEventListener('click', searchActivities);
-            document.getElementById('searchInput').addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    searchActivities();
-                }
-            });
-        });
-
+        
+        // Function to generate timeline
         function generateTimeline() {
             const timelineElement = document.getElementById('timeline');
-            timelineElement.innerHTML = ''; // Clear loading message
+            timelineElement.innerHTML = ''; // Clear element
+            
+            // Check if we have data
+            if (!timelineData || Object.keys(timelineData).length === 0) {
+                timelineElement.innerHTML = `<div class="loading">${translations[currentLang].loadingMessage}</div>`;
+                return;
+            }
             
             // Generate years
             Object.keys(timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
+                // Create year element
                 const yearDiv = document.createElement('div');
                 yearDiv.className = 'year';
                 yearDiv.innerHTML = `<span class="toggle-icon">▼</span> ${year}`;
                 timelineElement.appendChild(yearDiv);
                 
+                // Create months container
                 const monthsContainer = document.createElement('div');
                 monthsContainer.className = 'months-container';
                 timelineElement.appendChild(monthsContainer);
                 
                 // Generate months
-                Object.keys(timelineData[year]).sort((a, b) => {
-                    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                   'July', 'August', 'September', 'October', 'November', 'December'];
-                    return months.indexOf(b) - months.indexOf(a);
-                }).forEach(month => {
+                Object.keys(timelineData[year]).forEach(month => {
+                    // Create month element
                     const monthDiv = document.createElement('div');
                     monthDiv.className = 'month';
                     monthDiv.innerHTML = `<span class="toggle-icon">▼</span> ${month}`;
                     monthsContainer.appendChild(monthDiv);
                     
+                    // Create weeks container
                     const weeksContainer = document.createElement('div');
                     weeksContainer.className = 'weeks-container';
                     monthsContainer.appendChild(weeksContainer);
                     
                     // Generate weeks
                     Object.keys(timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
+                        // Create week element
                         const weekDiv = document.createElement('div');
                         weekDiv.className = 'week';
                         weekDiv.innerHTML = `<span class="toggle-icon">▼</span> ${week}`;
                         weeksContainer.appendChild(weekDiv);
                         
+                        // Create days container
                         const daysContainer = document.createElement('div');
                         daysContainer.className = 'days-container';
                         weeksContainer.appendChild(daysContainer);
@@ -765,42 +459,81 @@ function generateTimeline() {
                         // Generate days
                         Object.keys(timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
                             const activities = timelineData[year][month][week][day];
-                            const date = new Date(day);
-                            const formattedDate = date.toLocaleDateString('en-US', { 
-                                weekday: 'long', 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            });
                             
+                            // Parse date
+                            let date;
+                            try {
+                                date = new Date(day);
+                            } catch (e) {
+                                console.error("Invalid date format:", day);
+                                date = new Date(); // Fallback to current date
+                            }
+                            
+                            // Format date based on current language
+                            let formattedDate;
+                            try {
+                                switch(currentLang) {
+                                    case 'ro':
+                                        formattedDate = date.toLocaleDateString('ro-RO', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                        break;
+                                    case 'fr':
+                                        formattedDate = date.toLocaleDateString('fr-FR', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                        break;
+                                    default: // English
+                                        formattedDate = date.toLocaleDateString('en-US', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                }
+                            } catch (e) {
+                                console.error("Error formatting date:", e);
+                                formattedDate = day; // Fallback to raw date string
+                            }
+                            
+                            // Create day element
                             const dayDiv = document.createElement('div');
                             dayDiv.className = 'day';
                             dayDiv.dataset.date = day;
-                            dayDiv.textContent = `${formattedDate} (${activities.length} activities)`;
+                            dayDiv.textContent = `${formattedDate} (${activities.length} ${translations[currentLang].activities})`;
                             daysContainer.appendChild(dayDiv);
                             
-                            // Create the details container for this day
+                            // Create details container
                             const detailsDiv = document.createElement('div');
                             detailsDiv.className = 'day-details';
                             
-                            // Add activities to the details
+                            // Add activities to details
                             activities.forEach(activity => {
                                 const activityDiv = document.createElement('div');
                                 activityDiv.className = 'activity';
                                 
+                                // Add time
                                 const timeEl = document.createElement('div');
                                 timeEl.className = 'activity-time';
                                 timeEl.textContent = activity.time;
                                 activityDiv.appendChild(timeEl);
                                 
+                                // Add title
                                 const titleEl = document.createElement('div');
                                 titleEl.className = 'activity-title';
-                                titleEl.textContent = activity.title;
+                                titleEl.textContent = activity.title[currentLang] || activity.title.en; // Fallback to English
                                 activityDiv.appendChild(titleEl);
                                 
+                                // Add description
                                 const descEl = document.createElement('div');
                                 descEl.className = 'activity-description';
-                                descEl.textContent = activity.description;
+                                descEl.textContent = activity.description[currentLang] || activity.description.en; // Fallback to English
                                 activityDiv.appendChild(descEl);
                                 
                                 // Add references
@@ -824,28 +557,25 @@ function generateTimeline() {
                             
                             dayDiv.appendChild(detailsDiv);
                             
-                            // Add click event
-                            dayDiv.addEventListener('click', function(e) {
-                                if (e.target.classList.contains('day')) {
-                                    const details = this.querySelector('.day-details');
-                                    const allDetails = document.querySelectorAll('.day-details');
-                                    
-                                    // Hide all other details
-                                    allDetails.forEach(d => {
-                                        if (d !== details) {
-                                            d.style.display = 'none';
-                                            d.parentElement.classList.remove('active');
-                                        }
-                                    });
-                                    
-                                    // Toggle this one
-                                    if (details.style.display === 'block') {
-                                        details.style.display = 'none';
-                                        this.classList.remove('active');
-                                    } else {
-                                        details.style.display = 'block';
-                                        this.classList.add('active');
+                            // Add click event to expand/collapse details
+                            dayDiv.addEventListener('click', function() {
+                                const details = this.querySelector('.day-details');
+                                
+                                // Hide all other details
+                                document.querySelectorAll('.day-details').forEach(d => {
+                                    if (d !== details) {
+                                        d.style.display = 'none';
+                                        d.parentElement.classList.remove('active');
                                     }
+                                });
+                                
+                                // Toggle this one
+                                if (details.style.display === 'block') {
+                                    details.style.display = 'none';
+                                    this.classList.remove('active');
+                                } else {
+                                    details.style.display = 'block';
+                                    this.classList.add('active');
                                 }
                             });
                         });
@@ -853,13 +583,15 @@ function generateTimeline() {
                 });
             });
             
-            // Add toggle functionality for collapsible sections
+            // Add collapsible functionality for year/month/week
             document.querySelectorAll('.year, .month, .week').forEach(el => {
                 el.addEventListener('click', function(e) {
+                    // Only toggle if clicking on the element itself or the toggle icon
                     if (e.target === this || e.target.classList.contains('toggle-icon')) {
                         const icon = this.querySelector('.toggle-icon');
                         const container = this.nextElementSibling;
                         
+                        // Toggle display
                         if (container.style.display === 'none') {
                             container.style.display = 'block';
                             icon.textContent = '▼';
@@ -867,11 +599,15 @@ function generateTimeline() {
                             container.style.display = 'none';
                             icon.textContent = '►';
                         }
+                        
+                        // Prevent event from bubbling up
+                        e.stopPropagation();
                     }
                 });
             });
         }
         
+        // Function to search activities
         function searchActivities() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             if (searchTerm.trim() === '') return;
@@ -879,10 +615,9 @@ function generateTimeline() {
             // Reset UI
             document.querySelectorAll('.day').forEach(day => {
                 day.style.display = 'none';
-                day.classList.remove('search-result');
             });
             
-            document.querySelectorAll('.year, .month, .week, .months-container, .weeks-container, .days-container').forEach(el => {
+            document.querySelectorAll('.months-container, .weeks-container, .days-container').forEach(el => {
                 el.style.display = 'none';
             });
             
@@ -890,13 +625,22 @@ function generateTimeline() {
             
             // Search through all activities
             for (const year in timelineData) {
-                for (const month in timelineData[year]) {
-                    for (const week in timelineData[year][month]) {
-                        for (const day in timelineData[year][month][week]) {
-                            const activities = timelineData[year][month][week][day];
-                            let dayMatches = false;
+                const yearData = timelineData[year];
+                let yearHasMatch = false;
+                
+                for (const month in yearData) {
+                    const monthData = yearData[month];
+                    let monthHasMatch = false;
+                    
+                    for (const week in monthData) {
+                        const weekData = monthData[week];
+                        let weekHasMatch = false;
+                        
+                        for (const day in weekData) {
+                            const activities = weekData[day];
+                            let dayHasMatch = false;
                             
-                            // Check if any activity matches search term
+                            // Check each activity for matches
                             activities.forEach(activity => {
                                 const title = activity.title[currentLang] || activity.title.en;
                                 const description = activity.description[currentLang] || activity.description.en;
@@ -906,68 +650,75 @@ function generateTimeline() {
                                     description.toLowerCase().includes(searchTerm) ||
                                     activity.time.toLowerCase().includes(searchTerm)
                                 ) {
-                                    dayMatches = true;
+                                    dayHasMatch = true;
+                                    weekHasMatch = true;
+                                    monthHasMatch = true;
+                                    yearHasMatch = true;
+                                    hasResults = true;
                                 }
                             });
                             
-                            if (dayMatches) {
-                                // Show this day
+                            // Show matching days
+                            if (dayHasMatch) {
                                 const dayElement = document.querySelector(`.day[data-date="${day}"]`);
                                 if (dayElement) {
                                     dayElement.style.display = 'block';
-                                    dayElement.classList.add('search-result');
-                                    hasResults = true;
-                                    
-                                    // Show its parents
-                                    let parent = dayElement.parentElement;
-                                    while (parent) {
-                                        parent.style.display = 'block';
-                                        parent = parent.parentElement;
-                                    }
-                                    
-                                    // Find and show corresponding year, month, and week elements
-                                    document.querySelectorAll('.year').forEach(yearEl => {
-                                        if (yearEl.textContent.includes(year)) {
-                                            yearEl.style.display = 'block';
-                                        }
-                                    });
-                                    
-                                    document.querySelectorAll('.month').forEach(monthEl => {
-                                        if (monthEl.textContent.includes(month)) {
-                                            monthEl.style.display = 'block';
-                                        }
-                                    });
-                                    
-                                    document.querySelectorAll('.week').forEach(weekEl => {
-                                        if (weekEl.textContent.includes(week)) {
-                                            weekEl.style.display = 'block';
-                                        }
-                                    });
+                                    dayElement.parentElement.style.display = 'block'; // Show days container
                                 }
                             }
                         }
+                        
+                        // Show containers for matching weeks
+                        if (weekHasMatch) {
+                            document.querySelectorAll('.week').forEach(weekEl => {
+                                if (weekEl.textContent.includes(week)) {
+                                    weekEl.style.display = 'block';
+                                    weekEl.nextElementSibling.style.display = 'block'; // Show days container
+                                }
+                            });
+                        }
                     }
+                    
+                    // Show containers for matching months
+                    if (monthHasMatch) {
+                        document.querySelectorAll('.month').forEach(monthEl => {
+                            if (monthEl.textContent.includes(month)) {
+                                monthEl.style.display = 'block';
+                                monthEl.nextElementSibling.style.display = 'block'; // Show weeks container
+                            }
+                        });
+                    }
+                }
+                
+                // Show containers for matching years
+                if (yearHasMatch) {
+                    document.querySelectorAll('.year').forEach(yearEl => {
+                        if (yearEl.textContent.includes(year)) {
+                            yearEl.style.display = 'block';
+                            yearEl.nextElementSibling.style.display = 'block'; // Show months container
+                        }
+                    });
                 }
             }
             
+            // Show message if no results found
             if (!hasResults) {
                 alert(translations[currentLang].noResults);
                 
-                // Reset the display
+                // Reset display
                 document.querySelectorAll('.year, .month, .week, .months-container, .weeks-container, .days-container, .day').forEach(el => {
                     el.style.display = 'block';
                 });
             }
         }
         
+        // Initialize application when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize language selector
+            // Setup language switcher
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Remove active class from all buttons
+                    // Update active button
                     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    
-                    // Add active class to clicked button
                     this.classList.add('active');
                     
                     // Set language
@@ -975,10 +726,10 @@ function generateTimeline() {
                 });
             });
             
-            // Generate timeline with initial data
+            // Initialize timeline
             generateTimeline();
             
-            // Setup search functionality
+            // Setup search
             document.getElementById('searchButton').addEventListener('click', searchActivities);
             document.getElementById('searchInput').addEventListener('keyup', function(event) {
                 if (event.key === 'Enter') {
