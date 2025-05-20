@@ -1,0 +1,567 @@
+{
+  "2025": {
+    "May": {
+      "Week 3 (May 15-21)": {
+        "2025-05-20": [
+          {
+            "time": "09:30 AM", 
+            "title": {
+              "ro": "Comisia Senatului pentru Relații Externe",
+              "en": "Senate Committee on Foreign Relations",
+              "fr": "Commission du Sénat des Relations Étrangères"
+            }, 
+            "description": {
+              "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
+              "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
+              "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+            },
+            "references": [
+              { "text": "Registrul Oficial al Senatului", "url": "#" },
+              { "text": "Acoperire C-SPAN", "url": "#" }
+            ]
+          },
+          {
+            "time": "02:00 PM", 
+            "title": {
+              "ro": "Vot în Plen: H.R. 3782",
+              "en": "Floor Vote: H.R. 3782",
+              "fr": "Vote en Séance Plénière: H.R. 3782"
+            }, 
+            "description": {
+              "ro": "A votat 'Da' pentru Amendamentul la Legea privind Dezvoltarea Infrastructurii și Locurile de Muncă",
+              "en": "Voted 'Yes' on the Infrastructure Development and Jobs Act Amendment",
+              "fr": "A voté 'Oui' sur l'Amendement à la Loi sur le Développement des Infrastructures et l'Emploi"
+            },
+            "references": [
+              { "text": "Registrul de Vot al Congresului", "url": "#" }
+            ]
+          },
+          {
+            "time": "04:30 PM", 
+            "title": {
+              "ro": "Conferință de Presă",
+              "en": "Press Conference",
+              "fr": "Conférence de Presse"
+            }, 
+            "description": {
+              "ro": "A susținut o conferință de presă comună cu Senatorul Thompson discutând inițiativa legislativă bipartizană privind clima.",
+              "en": "Held joint press conference with Senator Thompson discussing bipartisan climate legislation initiative.",
+              "fr": "A tenu une conférence de presse conjointe avec le Sénateur Thompson discutant de l'initiative législative bipartisane sur le climat."
+            },
+            "references": [
+              { "text": "Comunicat de Presă Oficial", "url": "#" },
+              { "text": "Acoperire Washington Post", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-19": [
+          {
+            "time": "10:00 AM", 
+            "title": {
+              "ro": "Întâlnire cu Alegătorii",
+              "en": "Constituent Meeting",
+              "fr": "Réunion avec les Électeurs"
+            }, 
+            "description": {
+              "ro": "S-a întâlnit cu reprezentanți ai Asociației Profesorilor de Stat cu privire la prioritățile de finanțare a educației.",
+              "en": "Met with representatives from State Teachers Association regarding education funding priorities.",
+              "fr": "A rencontré des représentants de l'Association des Enseignants d'État concernant les priorités de financement de l'éducation."
+            },
+            "references": [
+              { "text": "Programul Săptămânal al Senatorului", "url": "#" }
+            ]
+          },
+          {
+            "time": "01:00 PM", 
+            "title": {
+              "ro": "Grup de Lucru al Comisiei pentru Buget",
+              "en": "Budget Committee Working Group",
+              "fr": "Groupe de Travail de la Commission du Budget"
+            }, 
+            "description": {
+              "ro": "A participat la sesiunea cu ușile închise privind viitoarele alocări fiscale.",
+              "en": "Participated in closed-door session on upcoming fiscal appropriations.",
+              "fr": "A participé à une session à huis clos sur les prochaines affectations fiscales."
+            },
+            "references": [
+              { "text": "Procesul Verbal al Comisiei", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-18": [
+          {
+            "time": "All Day", 
+            "title": {
+              "ro": "Vizită în District",
+              "en": "District Visit",
+              "fr": "Visite du District"
+            }, 
+            "description": {
+              "ro": "A vizitat zonele afectate de inundații din județele de nord și s-a întâlnit cu oficialii locali despre asistența federală pentru dezastre.",
+              "en": "Toured flood-damaged areas in northern counties and met with local officials about federal disaster assistance.",
+              "fr": "A visité les zones inondées dans les comtés du nord et a rencontré les responsables locaux au sujet de l'aide fédérale aux sinistrés."
+            },
+            "references": [
+              { "text": "Acoperire Știri Locale", "url": "#" },
+              { "text": "Postare Instagram", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-17": [
+          {
+            "time": "11:00 AM", 
+            "title": {
+              "ro": "Forum Public",
+              "en": "Community Town Hall",
+              "fr": "Forum Public"
+            }, 
+            "description": {
+              "ro": "A găzduit un forum public privind accesul la asistență medicală și prețurile medicamentelor la Centrul Comunitar.",
+              "en": "Hosted public forum on healthcare access and prescription drug pricing at City Community Center.",
+              "fr": "A organisé un forum public sur l'accès aux soins de santé et les prix des médicaments sur ordonnance au Centre Communautaire."
+            },
+            "references": [
+              { "text": "Înregistrarea Evenimentului", "url": "#" },
+              { "text": "Buletinul Informativ al Senatorului", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-16": [
+          {
+            "time": "09:00 AM", 
+            "title": {
+              "ro": "Voturi în Comisie",
+              "en": "Committee Votes",
+              "fr": "Votes en Commission"
+            }, 
+            "description": {
+              "ro": "A votat pentru înaintarea a trei nominalizări judiciare către Senatul Complet.",
+              "en": "Voted to advance three judicial nominations to the full Senate.",
+              "fr": "A voté pour faire avancer trois nominations judiciaires vers le Sénat plénier."
+            },
+            "references": [
+              { "text": "Registrul Comisiei Juridice", "url": "#" }
+            ]
+          },
+          {
+            "time": "02:30 PM", 
+            "title": {
+              "ro": "Discurs de Politică",
+              "en": "Policy Address",
+              "fr": "Discours de Politique"
+            }, 
+            "description": {
+              "ro": "A livrat discursul principal la Facultatea de Drept a Universității despre propunerile de reformă a justiției penale.",
+              "en": "Delivered keynote address at University Law School on criminal justice reform proposals.",
+              "fr": "A prononcé le discours principal à la Faculté de Droit de l'Université sur les propositions de réforme de la justice pénale."
+            },
+            "references": [
+              { "text": "Transcrierea Discursului", "url": "#" },
+              { "text": "Pagina Evenimentului Universitar", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-15": [
+          {
+            "time": "10:30 AM", 
+            "title": {
+              "ro": "Briefing de Informații",
+              "en": "Intelligence Briefing",
+              "fr": "Briefing sur le Renseignement"
+            }, 
+            "description": {
+              "ro": "A participat la un briefing clasificat privind evoluțiile de securitate internațională.",
+              "en": "Attended classified briefing on international security developments.",
+              "fr": "A assisté à un briefing classifié sur les développements de sécurité internationale."
+            },
+            "references": [
+              { "text": "Calendarul Senatului", "url": "#" }
+            ]
+          },
+          {
+            "time": "03:00 PM", 
+            "title": {
+              "ro": "Introducerea Proiectului de Lege",
+              "en": "Bill Introduction",
+              "fr": "Introduction du Projet de Loi"
+            }, 
+            "description": {
+              "ro": "A introdus S.892, 'Legea Extinderii Internetului în Banda Largă în Zonele Rurale 2025' cu patru co-sponsori.",
+              "en": "Introduced S.892, the 'Rural Broadband Expansion Act of 2025' with four co-sponsors.",
+              "fr": "A présenté S.892, la 'Loi sur l'Expansion du Haut Débit Rural de 2025' avec quatre co-parrains."
+            },
+            "references": [
+              { "text": "Registrul Congresului", "url": "#" },
+              { "text": "Textul Proiectului de Lege", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 2 (May 8-14)": {
+        "2025-05-14": [
+          {
+            "time": "09:00 AM", 
+            "title": {
+              "ro": "Audierea Comisiei pentru Agricultură",
+              "en": "Agriculture Committee Hearing",
+              "fr": "Audition de la Commission de l'Agriculture"
+            }, 
+            "description": {
+              "ro": "A chestionat martorii cu privire la măsurile de ajutor pentru secetă și subvențiile agricole.",
+              "en": "Questioned witnesses on drought relief measures and farm subsidies.",
+              "fr": "A interrogé des témoins sur les mesures d'aide à la sécheresse et les subventions agricoles."
+            },
+            "references": [
+              { "text": "Transcrierea Comisiei", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-12": [
+          {
+            "time": "11:00 AM", 
+            "title": {
+              "ro": "Întâlnire Bipartizană privind Infrastructura",
+              "en": "Bipartisan Infrastructure Meeting",
+              "fr": "Réunion Bipartisane sur l'Infrastructure"
+            }, 
+            "description": {
+              "ro": "A participat la grupul de lucru privind formulele de alocare a fondurilor pentru transport.",
+              "en": "Participated in working group on transportation funding allocation formulas.",
+              "fr": "A participé au groupe de travail sur les formules d'allocation des fonds de transport."
+            },
+            "references": [
+              { "text": "Minuta Întâlnirii", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-10": [
+          {
+            "time": "02:00 PM", 
+            "title": {
+              "ro": "Eveniment pentru Veterani",
+              "en": "Veterans Event",
+              "fr": "Événement pour les Vétérans"
+            }, 
+            "description": {
+              "ro": "A participat la ceremonia de onorare a veteranilor de stat din Vietnam și a anunțat deschiderea unei noi clinici VA.",
+              "en": "Attended ceremony honoring state Vietnam veterans and announced new VA clinic opening.",
+              "fr": "A assisté à la cérémonie honorant les vétérans du Vietnam de l'État et a annoncé l'ouverture d'une nouvelle clinique VA."
+            },
+            "references": [
+              { "text": "Acoperire Știri Locale", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-09": [
+          {
+            "time": "10:00 AM", 
+            "title": {
+              "ro": "Ședință de Strategie Legislativă",
+              "en": "Legislative Strategy Session",
+              "fr": "Session de Stratégie Législative"
+            }, 
+            "description": {
+              "ro": "S-a întâlnit cu personalul pentru a dezvolta priorități legislative pentru următorul trimestru.",
+              "en": "Met with staff to develop legislative priorities for the upcoming quarter.",
+              "fr": "A rencontré le personnel pour développer les priorités législatives pour le trimestre à venir."
+            },
+            "references": [
+              { "text": "Agenda Internă", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 1 (May 1-7)": {
+        "2025-05-07": [
+          {
+            "time": "09:30 AM", 
+            "title": {
+              "ro": "Audierea Comisiei pentru Știință și Tehnologie",
+              "en": "Science and Technology Committee Hearing",
+              "fr": "Audition de la Commission des Sciences et Technologies"
+            }, 
+            "description": {
+              "ro": "A chestionat martorii despre riscurile inteligenței artificiale și propunerile de reglementare.",
+              "en": "Questioned witnesses about artificial intelligence risks and regulatory proposals.",
+              "fr": "A interrogé des témoins sur les risques de l'intelligence artificielle et les propositions réglementaires."
+            },
+            "references": [
+              { "text": "Transcrierea Comisiei", "url": "#" },
+              { "text": "Video Arhivat", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-05": [
+          {
+            "time": "01:30 PM", 
+            "title": {
+              "ro": "Masa Rotundă cu Liderii de Afaceri",
+              "en": "Business Leaders Roundtable",
+              "fr": "Table Ronde avec les Leaders d'Entreprise"
+            }, 
+            "description": {
+              "ro": "A găzduit discuții despre dezvoltarea economică regională cu directori executivi din industria manufacturieră.",
+              "en": "Hosted discussions on regional economic development with manufacturing industry executives.",
+              "fr": "A organisé des discussions sur le développement économique régional avec des dirigeants de l'industrie manufacturière."
+            },
+            "references": [
+              { "text": "Lista Participanților", "url": "#" },
+              { "text": "Raport de Sinteză", "url": "#" }
+            ]
+          }
+        ],
+        "2025-05-02": [
+          {
+            "time": "11:00 AM", 
+            "title": {
+              "ro": "Vizită la Școală",
+              "en": "School Visit",
+              "fr": "Visite d'École"
+            }, 
+            "description": {
+              "ro": "A vizitat Liceul Central pentru a discuta cu elevii despre guvernare și implicare civică.",
+              "en": "Visited Central High School to discuss governance and civic engagement with students.",
+              "fr": "A visité le Lycée Central pour discuter de gouvernance et d'engagement civique avec les élèves."
+            },
+            "references": [
+              { "text": "Buletinul Școlar", "url": "#" },
+              { "text": "Galerie Foto", "url": "#" }
+            ]
+          }
+        ]
+      }
+    },
+    "April": {
+      "Week 4 (April 24-30)": {
+        "2025-04-28": [
+          {
+            "time": "10:00 AM", 
+            "title": {
+              "ro": "Audierea Comisiei",
+              "en": "Committee Hearing",
+              "fr": "Audition de la Commission"
+            }, 
+            "description": {
+              "ro": "A condus interogatoriul privind reglementarea tehnologiei și aplicarea normelor de confidențialitate a datelor.",
+              "en": "Led questioning on tech regulation and data privacy enforcement.",
+              "fr": "A dirigé l'interrogatoire sur la réglementation technologique et l'application de la confidentialité des données."
+            },
+            "references": [
+              { "text": "Registrul Comisiei de Comerț a Senatului", "url": "#" }
+            ]
+          }
+        ],
+        "2025-04-25": [
+          {
+            "time": "03:30 PM", 
+            "title": {
+              "ro": "Forum Economic",
+              "en": "Economic Forum",
+              "fr": "Forum Économique"
+            }, 
+            "description": {
+              "ro": "A participat la o discuție panel despre inflație și politică monetară la conferința Rezervei Federale.",
+              "en": "Participated in panel discussion on inflation and monetary policy at Federal Reserve conference.",
+              "fr": "A participé à une table ronde sur l'inflation et la politique monétaire lors de la conférence de la Réserve Fédérale."
+            },
+            "references": [
+              { "text": "Programul Evenimentului", "url": "#" },
+              { "text": "Acoperire Jurnal Economic", "url": "#" }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "2024": {
+    "December": {
+      "Week 2 (December 8-14)": {
+        "2024-12-10": [
+          {
+            "time": "01:00 PM", 
+            "title": {
+              "ro": "Vot pentru Autorizarea Apărării",
+              "en": "Defense Authorization Vote",
+              "fr": "Vote d'Autorisation de la Défense"
+            }, 
+            "description": {
+              "ro": "A votat pentru trecerea autorizației anuale de cheltuieli pentru apărare cu amendament privind finanțarea securității cibernetice.",
+              "en": "Voted for passage of annual defense spending authorization with amendment on cybersecurity funding.",
+              "fr": "A voté pour l'adoption de l'autorisation annuelle des dépenses de défense avec un amendement sur le financement de la cybersécurité."
+            },
+            "references": [
+              { "text": "Registrul de Vot", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 1 (December 1-7)": {
+        "2024-12-05": [
+          {
+            "time": "10:30 AM", 
+            "title": {
+              "ro": "Audierea Comisiei pentru Mediu",
+              "en": "Environment Committee Hearing",
+              "fr": "Audition de la Commission de l'Environnement"
+            }, 
+            "description": {
+              "ro": "A interogat oficialii EPA cu privire la implementarea noilor standarde de calitate a aerului.",
+              "en": "Questioned EPA officials about implementation of new air quality standards.",
+              "fr": "A interrogé des responsables de l'EPA sur la mise en œuvre des nouvelles normes de qualité de l'air."
+            },
+            "references": [
+              { "text": "Transcrierea Comisiei", "url": "#" },
+              { "text": "Declarație de Presă", "url": "#" }
+            ]
+          }
+        ]
+      }
+    },
+    "November": {
+      "Week 4 (November 22-30)": {
+        "2024-11-25": [
+          {
+            "time": "02:00 PM", 
+            "title": {
+              "ro": "Vizita Delegației Străine",
+              "en": "Foreign Delegation Visit",
+              "fr": "Visite de la Délégation Étrangère"
+            }, 
+            "description": {
+              "ro": "S-a întâlnit cu parlamentari din Europa de Est pentru a discuta cooperarea în domeniul securității și oportunități comerciale.",
+              "en": "Met with Eastern European parliamentarians to discuss security cooperation and trade opportunities.",
+              "fr": "A rencontré des parlementaires d'Europe de l'Est pour discuter de la coopération en matière de sécurité et des opportunités commerciales."
+            },
+            "references": [
+              { "text": "Itinerariul Delegației", "url": "#" },
+              { "text": "Comunicat Comun", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 3 (November 15-21)": {
+        "2024-11-19": [
+          {
+            "time": "09:00 AM", 
+            "title": {
+              "ro": "Ședința de Orientare pentru Noi Membri",
+              "en": "New Member Orientation Session",
+              "fr": "Session d'Orientation pour Nouveaux Membres"
+            }, 
+            "description": {
+              "ro": "A prezentat regulile Senatului și procedurile legislative pentru senatorii nou aleși.",
+              "en": "Presented Senate rules and legislative procedures to newly elected senators.",
+              "fr": "A présenté les règles du Sénat et les procédures législatives aux sénateurs nouvellement élus."
+            },
+            "references": [
+              { "text": "Manual de Orientare", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 2 (November 8-14)": {
+        "2024-11-12": [
+          {
+            "time": "02:30 PM", 
+            "title": {
+              "ro": "Întâlnirea Partidului",
+              "en": "Party Caucus Meeting",
+              "fr": "Réunion du Caucus du Parti"
+            }, 
+            "description": {
+              "ro": "A participat la discuții despre agenda legislativă pentru sesiunea următoare.",
+              "en": "Participated in discussions about legislative agenda for upcoming session.",
+              "fr": "A participé aux discussions sur l'agenda législatif pour la prochaine session."
+            },
+            "references": [
+              { "text": "Agenda Internă", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 1 (November 1-7)": {
+        "2024-11-05": [
+          {
+            "time": "08:00 PM", 
+            "title": {
+              "ro": "Noaptea Alegerilor",
+              "en": "Election Night",
+              "fr": "Soirée Électorale"
+            }, 
+            "description": {
+              "ro": "Reales în Senat cu 53,7% din voturi.",
+              "en": "Re-elected to Senate with 53.7% of vote.",
+              "fr": "Réélu au Sénat avec 53,7% des voix."
+            },
+            "references": [
+              { "text": "Rezultatele Alegerilor", "url": "#" },
+              { "text": "Discursul de Victorie", "url": "#" }
+            ]
+          }
+        ]
+      }
+    },
+    "October": {
+      "Week 4 (October 24-31)": {
+        "2024-10-30": [
+          {
+            "time": "07:00 PM", 
+            "title": {
+              "ro": "Adunare Electorală",
+              "en": "Campaign Rally",
+              "fr": "Rassemblement de Campagne"
+            }, 
+            "description": {
+              "ro": "A susținut un discurs final către alegători la Centrul Civic din capitala statului.",
+              "en": "Delivered final address to voters at the state capital's Civic Center.",
+              "fr": "A prononcé un dernier discours aux électeurs au Centre Civique de la capitale de l'État."
+            },
+            "references": [
+              { "text": "Acoperire Media", "url": "#" },
+              { "text": "Transcrierea Discursului", "url": "#" }
+            ]
+          }
+        ],
+        "2024-10-28": [
+          {
+            "time": "12:00 PM", 
+            "title": {
+              "ro": "Dezbatere Electorală",
+              "en": "Campaign Debate",
+              "fr": "Débat de Campagne"
+            }, 
+            "description": {
+              "ro": "A participat la dezbaterea finală a campaniei găzduită de Asociația de Presă a Statului.",
+              "en": "Participated in final campaign debate hosted by State Press Association.",
+              "fr": "A participé au débat final de la campagne organisé par l'Association de Presse de l'État."
+            },
+            "references": [
+              { "text": "Înregistrare Video", "url": "#" },
+              { "text": "Analiză Post-Dezbatere", "url": "#" }
+            ]
+          }
+        ]
+      },
+      "Week 3 (October 17-23)": {
+        "2024-10-21": [
+          {
+            "time": "10:00 AM", 
+            "title": {
+              "ro": "Forumul Fermierilor",
+              "en": "Farmers Forum",
+              "fr": "Forum des Agriculteurs"
+            }, 
+            "description": {
+              "ro": "A discutat politicile agricole și inițiativele rurale cu asociațiile de fermieri.",
+              "en": "Discussed agricultural policies and rural initiatives with farming associations.",
+              "fr": "A discuté des politiques agricoles et des initiatives rurales avec les associations d'agriculteurs."
+            },
+            "references": [
+              { "text": "Declarație de Poziție Agricolă", "url": "#" }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

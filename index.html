@@ -10,6 +10,144 @@
             line-height: 1.6;
             color: #333;
             width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #1a3a6e;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .header-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .main-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+        
+        .lang-btn {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .lang-btn.active {
+            background-color: #1a3a6e;
+            color: white;
+            border-color: #1a3a6e;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search-container button {
+            padding: 10px 15px;
+            background-color: #1a3a6e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .timeline {
+            height: calc(100vh - 180px);
+            min-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 10px;
+        }
+        
+        .year, .month, .week {
+            cursor: pointer;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .year {
+            background-color: #1a3a6e;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .month {
+            background-color: #4a6fa5;
+            color: white;
+            margin-left: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .week {
+            background-color: #8faad1;
+            color: white;
+            margin-left: 40px;
+        }
+        
+        .day {
+            padding: 10px 15px;
+            margin: 5px 0 5px 60px;
+            background-color: #edf2fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            <!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal de Activitate Politică</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
