@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ce face domnul Dan</title>
+    <title>Jurnal de Activitate Politică</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,45 +15,80 @@
             padding: 0;
             background-color: #f7f9fc;
         }
-        
+
         .container {
             width: 100%;
             max-width: 100%;
             margin: 0 auto;
             padding: 0;
         }
-        
+
         header {
             background-color: #1a3a6e;
             color: white;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         h1 {
             margin: 0;
             font-size: 2rem;
         }
-        
+
         .header-content {
             max-width: 1500px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         .main-content {
             max-width: 1500px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
+        .main-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navigation {
+            background-color: #f0f4f8;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .nav-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+        }
+
+        .nav-link {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #1a3a6e;
+            font-weight: bold;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover {
+            border-bottom: 2px solid #1a3a6e;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid #1a3a6e;
+        }
+
         .language-selector {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 15px;
         }
-        
+
         .lang-btn {
             padding: 5px 10px;
             margin-left: 5px;
@@ -61,26 +97,26 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
+
         .lang-btn.active {
             background-color: #1a3a6e;
             color: white;
             border-color: #1a3a6e;
         }
-        
+
         .search-container {
             margin: 20px 0;
             display: flex;
             gap: 10px;
         }
-        
+
         .search-container input {
             flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        
+
         .search-container button {
             padding: 10px 15px;
             background-color: #1a3a6e;
@@ -89,7 +125,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
+
         .timeline {
             height: calc(100vh - 180px);
             min-height: 600px;
@@ -97,38 +133,40 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 10px;
         }
-        
-        .year, .month, .week {
+
+        .year,
+        .month,
+        .week {
             cursor: pointer;
             padding: 10px 15px;
             margin: 5px 0;
             border-radius: 4px;
             transition: background-color 0.2s;
         }
-        
+
         .year {
             background-color: #1a3a6e;
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
         }
-        
+
         .month {
             background-color: #4a6fa5;
             color: white;
             margin-left: 20px;
             font-size: 1.1rem;
         }
-        
+
         .week {
             background-color: #8faad1;
             color: white;
             margin-left: 40px;
         }
-        
+
         .day {
             padding: 10px 15px;
             margin: 5px 0 5px 60px;
@@ -138,11 +176,11 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .day:hover {
             background-color: #dde9f7;
         }
-        
+
         .day-details {
             display: none;
             padding: 15px;
@@ -151,40 +189,40 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        
+
         .day.active {
             background-color: #c1d6f0;
             border-color: #8faad1;
         }
-        
+
         .activity {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
-        
+
         .activity:last-child {
             border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
-        
+
         .activity-time {
             font-weight: bold;
             color: #1a3a6e;
         }
-        
+
         .activity-title {
             font-weight: bold;
             margin: 5px 0;
             font-size: 1.1rem;
         }
-        
+
         .activity-description {
             margin-bottom: 10px;
             line-height: 1.5;
         }
-        
+
         .reference {
             font-size: 0.85em;
             color: #666;
@@ -195,68 +233,113 @@
             margin-top: 5px;
             margin-right: 5px;
         }
-        
+
         .reference a {
             color: #1a3a6e;
             text-decoration: none;
         }
-        
+
         .reference a:hover {
             text-decoration: underline;
         }
-        
+
         .toggle-icon {
             display: inline-block;
             width: 20px;
             text-align: center;
         }
-        
+
         .loading {
             text-align: center;
             padding: 20px;
             color: #666;
             font-size: 1.2rem;
         }
-        
+
         @media (max-width: 768px) {
             .timeline {
                 height: 500px;
             }
-            
+
             .day {
                 margin-left: 30px;
             }
-            
+
             .month {
                 margin-left: 15px;
             }
-            
+
             .week {
                 margin-left: 30px;
             }
+
+            .nav-content {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                margin-bottom: 10px;
+            }
+        }
+
+        footer {
+            background-color: #1a3a6e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <div class="header-content">
-                <h1 id="headerTitle">Ce face Domnul Dan</h1>
+                <h1 id="headerTitle">Senatorul James Mitchell: Jurnal de Activitate</h1>
+                <p id="headerSubtitle">Monitorizarea activităților oficiale, voturi, apariții publice și declarații</p>
+                <footer>
+                    <div class="footer-content">
+                        <p>&copy; 2025 <span id="footerTitle">Jurnal de Activitate Politică</span>. <span
+                                id="footerRights">Toate drepturile rezervate.</span></p>
+                    </div>
+                </footer>
             </div>
         </header>
-        
-        <div class="main-content">
-            <div class="language-selector">
-                <button class="lang-btn active" data-lang="ro">Română</button>
-                <button class="lang-btn" data-lang="en">English</button>
-                <button class="lang-btn" data-lang="fr">Français</button>
+
+        <div class="navigation">
+            <div class="nav-content">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="https://github.com/yourusername/political-journal" class="nav-link" target="_blank">GitHub</a>
             </div>
-            
+        </div>
+
+        <div class="main-content">
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Caută activități, subiecte sau locații...">
                 <button id="searchButton">Caută</button>
             </div>
-            
+
             <div class="timeline" id="timeline">
                 <!-- Timeline content will be dynamically generated -->
                 <div class="loading" id="loadingMessage">Se încarcă datele...</div>
@@ -265,61 +348,9 @@
     </div>
 
     <script>
-        // Language translations
-        const translations = {
-            "ro": {
-                "headerTitle": "Ce face Domnul Dan",
-                "searchPlaceholder": "Caută...",
-                "searchButton": "caută",
-                "loadingMessage": "Se încarcă datele...",
-                "noResults": "Nu s-au găsit activități care să corespundă termenului de căutare.",
-                "activities": "activități",
-                "loadError": "Eroare la încărcarea datelor:"
-            },
-            "en": {
-                "headerTitle": "Senator James Mitchell: Activity Journal",
-                "searchPlaceholder": "search...",
-                "searchButton": "Search",
-                "loadingMessage": "Loading timeline data...",
-                "noResults": "No activities found matching your search term.",
-                "activities": "activities",
-                "loadError": "Error loading data:"
-            },
-            "fr": {
-                "headerTitle": "Sénateur James Mitchell: Journal d'Activité",
-                "searchPlaceholder": "Rechercher des activités, sujets ou lieux...",
-                "searchButton": "Rechercher",
-                "loadingMessage": "Chargement des données...",
-                "noResults": "Aucune activité trouvée correspondant à votre recherche.",
-                "activities": "activités",
-                "loadError": "Erreur de chargement des données:"
-            }
-        };
-        
-        // Current language
-        let currentLang = "ro";
+        // Current language is fixed to Romanian
         let timelineData = null;
-        
-        // Function to set language
-        function setLanguage(lang) {
-            currentLang = lang;
-            
-            // Update UI elements
-            document.getElementById("headerTitle").textContent = translations[lang].headerTitle;
-            document.getElementById("headerSubtitle").textContent = translations[lang].headerSubtitle;
-            document.getElementById("searchInput").placeholder = translations[lang].searchPlaceholder;
-            document.getElementById("searchButton").textContent = translations[lang].searchButton;
-            document.getElementById("loadingMessage").textContent = translations[lang].loadingMessage;
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-            
-            // Regenerate timeline with new language
-            if (timelineData) {
-                generateTimeline();
-            }
-        }
-        
+
         // Function to load timeline data from JSON file
         async function loadTimelineData() {
             try {
@@ -335,51 +366,51 @@
             } catch (error) {
                 console.error("Error loading timeline data:", error);
                 // Display error in timeline container
-                document.getElementById('timeline').innerHTML = 
-                    `<div class="loading" style="color: red;">${translations[currentLang].loadError} ${error.message}. Check console for details.</div>`;
-                
+                document.getElementById('timeline').innerHTML =
+                    `<div class="loading" style="color: red;">Eroare la încărcarea datelor: ${error.message}. Verificați consola pentru detalii.</div>`;
+
                 // Return empty object as fallback
                 return {};
             }
         }
-        
+
         // Function to generate timeline
         function generateTimeline() {
             const timelineElement = document.getElementById('timeline');
             timelineElement.innerHTML = ''; // Clear element
-            
+
             // Check if we have data
             if (!timelineData || Object.keys(timelineData).length === 0) {
-                timelineElement.innerHTML = `<div class="loading">${translations[currentLang].loadingMessage}</div>`;
+                timelineElement.innerHTML = `<div class="loading">Se încarcă datele...</div>`;
                 return;
             }
-            
+
             // Generate years
             Object.keys(timelineData).sort((a, b) => b.localeCompare(a)).forEach(year => {
-                // Create year element
+                // Create year element - use year string as-is
                 const yearDiv = document.createElement('div');
                 yearDiv.className = 'year';
                 yearDiv.innerHTML = `<span class="toggle-icon">▼</span> ${year}`;
                 timelineElement.appendChild(yearDiv);
-                
+
                 // Create months container
                 const monthsContainer = document.createElement('div');
                 monthsContainer.className = 'months-container';
                 timelineElement.appendChild(monthsContainer);
-                
+
                 // Generate months
                 Object.keys(timelineData[year]).forEach(month => {
                     // Create month element
                     const monthDiv = document.createElement('div');
                     monthDiv.className = 'month';
-                    monthDiv.innerHTML = `<span class="toggle-icon">▼</span> ${month}`;
+                    monthDiv.innerHTML = `<span class="toggle-icon">▼</span> Luna ${month}`;
                     monthsContainer.appendChild(monthDiv);
-                    
+
                     // Create weeks container
                     const weeksContainer = document.createElement('div');
                     weeksContainer.className = 'weeks-container';
                     monthsContainer.appendChild(weeksContainer);
-                    
+
                     // Generate weeks
                     Object.keys(timelineData[year][month]).sort((a, b) => b.localeCompare(a)).forEach(week => {
                         // Create week element
@@ -387,124 +418,85 @@
                         weekDiv.className = 'week';
                         weekDiv.innerHTML = `<span class="toggle-icon">▼</span> ${week}`;
                         weeksContainer.appendChild(weekDiv);
-                        
+
                         // Create days container
                         const daysContainer = document.createElement('div');
                         daysContainer.className = 'days-container';
                         weeksContainer.appendChild(daysContainer);
-                        
+
                         // Generate days
                         Object.keys(timelineData[year][month][week]).sort((a, b) => b.localeCompare(a)).forEach(day => {
                             const activities = timelineData[year][month][week][day];
-                            
-                            // Parse date
-                            let date;
-                            try {
-                                date = new Date(day);
-                            } catch (e) {
-                                console.error("Invalid date format:", day);
-                                date = new Date(); // Fallback to current date
-                            }
-                            
-                            // Format date based on current language
-                            let formattedDate;
-                            try {
-                                switch(currentLang) {
-                                    case 'ro':
-                                        formattedDate = date.toLocaleDateString('ro-RO', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                        break;
-                                    case 'fr':
-                                        formattedDate = date.toLocaleDateString('fr-FR', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                        break;
-                                    default: // English
-                                        formattedDate = date.toLocaleDateString('en-US', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                }
-                            } catch (e) {
-                                console.error("Error formatting date:", e);
-                                formattedDate = day; // Fallback to raw date string
-                            }
-                            
+
+                            // Use the day string as-is, no date parsing
+                            const dayDisplay = day;
+
                             // Create day element
                             const dayDiv = document.createElement('div');
                             dayDiv.className = 'day';
                             dayDiv.dataset.date = day;
-                            dayDiv.textContent = `${formattedDate} (${activities.length} ${translations[currentLang].activities})`;
+                            dayDiv.textContent = `${dayDisplay} (${activities.length} activități)`;
                             daysContainer.appendChild(dayDiv);
-                            
+
                             // Create details container
                             const detailsDiv = document.createElement('div');
                             detailsDiv.className = 'day-details';
-                            
+
                             // Add activities to details
                             activities.forEach(activity => {
                                 const activityDiv = document.createElement('div');
                                 activityDiv.className = 'activity';
-                                
+
                                 // Add time
                                 const timeEl = document.createElement('div');
                                 timeEl.className = 'activity-time';
                                 timeEl.textContent = activity.time;
                                 activityDiv.appendChild(timeEl);
-                                
+
                                 // Add title
                                 const titleEl = document.createElement('div');
                                 titleEl.className = 'activity-title';
-                                titleEl.textContent = activity.title[currentLang] || activity.title.en; // Fallback to English
+                                titleEl.textContent = activity.title.ro || activity.title; // Use Romanian or fallback
                                 activityDiv.appendChild(titleEl);
-                                
+
                                 // Add description
                                 const descEl = document.createElement('div');
                                 descEl.className = 'activity-description';
-                                descEl.textContent = activity.description[currentLang] || activity.description.en; // Fallback to English
+                                descEl.textContent = activity.description.ro || activity.description; // Use Romanian or fallback
                                 activityDiv.appendChild(descEl);
-                                
+
                                 // Add references
                                 if (activity.references && activity.references.length > 0) {
                                     const refsContainer = document.createElement('div');
                                     refsContainer.className = 'references-container';
-                                    
+
                                     activity.references.forEach(ref => {
                                         const refEl = document.createElement('div');
                                         refEl.className = 'reference';
-                                        
+
                                         const linkEl = document.createElement('a');
                                         linkEl.href = ref.url;
                                         linkEl.textContent = ref.text;
                                         linkEl.target = '_blank';
-                                        
+
                                         refEl.appendChild(linkEl);
                                         refsContainer.appendChild(refEl);
                                     });
-                                    
+
                                     activityDiv.appendChild(refsContainer);
                                 }
-                                
+
                                 detailsDiv.appendChild(activityDiv);
                             });
-                            
+
                             dayDiv.appendChild(detailsDiv);
-                            
+
                             // Add click event to expand/collapse details
-                            dayDiv.addEventListener('click', function(e) {
+                            dayDiv.addEventListener('click', function (e) {
                                 // Only handle click if it's directly on the day element
                                 if (e.target === this || e.target.classList.contains('day')) {
                                     const details = this.querySelector('.day-details');
-                                    
+
                                     // Hide all other details
                                     document.querySelectorAll('.day-details').forEach(d => {
                                         if (d !== details) {
@@ -512,7 +504,7 @@
                                             d.parentElement.classList.remove('active');
                                         }
                                     });
-                                    
+
                                     // Toggle this one
                                     if (details.style.display === 'block') {
                                         details.style.display = 'none';
@@ -527,15 +519,15 @@
                     });
                 });
             });
-            
+
             // Add collapsible functionality for year/month/week
             document.querySelectorAll('.year, .month, .week').forEach(el => {
-                el.addEventListener('click', function(e) {
+                el.addEventListener('click', function (e) {
                     // Only toggle if clicking on the element itself or the toggle icon
                     if (e.target === this || e.target.classList.contains('toggle-icon')) {
                         const icon = this.querySelector('.toggle-icon');
                         const container = this.nextElementSibling;
-                        
+
                         // Toggle display
                         if (container.style.display === 'none') {
                             container.style.display = 'block';
@@ -544,58 +536,58 @@
                             container.style.display = 'none';
                             icon.textContent = '►';
                         }
-                        
+
                         // Prevent event from bubbling up
                         e.stopPropagation();
                     }
                 });
             });
         }
-        
+
         // Function to search activities
         function searchActivities() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             if (searchTerm.trim() === '') return;
-            
+
             // Reset UI
             document.querySelectorAll('.day').forEach(day => {
                 day.style.display = 'none';
             });
-            
+
             document.querySelectorAll('.months-container, .weeks-container, .days-container').forEach(el => {
                 el.style.display = 'none';
             });
-            
+
             document.querySelectorAll('.year, .month, .week').forEach(el => {
                 el.style.display = 'none';
             });
-            
+
             let hasResults = false;
-            
+
             // Search through all activities
             for (const year in timelineData) {
                 const yearData = timelineData[year];
                 let yearHasMatch = false;
-                
+
                 for (const month in yearData) {
                     const monthData = yearData[month];
                     let monthHasMatch = false;
-                    
+
                     for (const week in monthData) {
                         const weekData = monthData[week];
                         let weekHasMatch = false;
-                        
+
                         for (const day in weekData) {
                             const activities = weekData[day];
                             let dayHasMatch = false;
-                            
+
                             // Check each activity for matches
                             activities.forEach(activity => {
-                                const title = activity.title[currentLang] || activity.title.en;
-                                const description = activity.description[currentLang] || activity.description.en;
-                                
+                                const title = activity.title.ro || activity.title;
+                                const description = activity.description.ro || activity.description;
+
                                 if (
-                                    title.toLowerCase().includes(searchTerm) || 
+                                    title.toLowerCase().includes(searchTerm) ||
                                     description.toLowerCase().includes(searchTerm) ||
                                     activity.time.toLowerCase().includes(searchTerm)
                                 ) {
@@ -606,7 +598,7 @@
                                     hasResults = true;
                                 }
                             });
-                            
+
                             // Show matching days
                             if (dayHasMatch) {
                                 const dayElement = document.querySelector(`.day[data-date="${day}"]`);
@@ -616,7 +608,7 @@
                                 }
                             }
                         }
-                        
+
                         // Show containers for matching weeks
                         if (weekHasMatch) {
                             document.querySelectorAll('.week').forEach(weekEl => {
@@ -627,7 +619,7 @@
                             });
                         }
                     }
-                    
+
                     // Show containers for matching months
                     if (monthHasMatch) {
                         document.querySelectorAll('.month').forEach(monthEl => {
@@ -638,7 +630,7 @@
                         });
                     }
                 }
-                
+
                 // Show containers for matching years
                 if (yearHasMatch) {
                     document.querySelectorAll('.year').forEach(yearEl => {
@@ -649,28 +641,28 @@
                     });
                 }
             }
-            
+
             // Show message if no results found
             if (!hasResults) {
-                alert(translations[currentLang].noResults);
-                
+                alert("Nu s-au găsit activități care să corespundă termenului de căutare.");
+
                 // Reset display
                 document.querySelectorAll('.year, .month, .week, .months-container, .weeks-container, .days-container, .day').forEach(el => {
                     el.style.display = 'block';
                 });
             }
         }
-        
+
         // Initialize application when DOM is ready
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async function () {
             try {
                 // Show loading message
-                document.getElementById('loadingMessage').textContent = translations[currentLang].loadingMessage;
-                
+                document.getElementById('loadingMessage').textContent = "Se încarcă datele...";
+
                 // Load data from JSON file
                 console.log("Starting application, loading JSON data...");
                 timelineData = await loadTimelineData();
-                
+
                 // Check if data was loaded successfully
                 if (timelineData && Object.keys(timelineData).length > 0) {
                     console.log("JSON data loaded successfully, generating timeline");
@@ -678,7 +670,7 @@
                     generateTimeline();
                 } else {
                     console.warn("JSON data load failed or empty, loading from embedded fallbackData");
-                    alert("Could not load timeline-data.json. Please make sure the file exists in the same directory as the HTML file.");
+                    alert("Nu s-a putut încărca timeline-data.json. Asigurați-vă că fișierul există în același director cu fișierul HTML.");
                     // Use fallback dummy data
                     timelineData = {
                         "2025": {
@@ -686,16 +678,12 @@
                                 "Week 3 (May 15-21)": {
                                     "2025-05-20": [
                                         {
-                                            "time": "09:30 AM", 
+                                            "time": "09:30 AM",
                                             "title": {
-                                                "ro": "Comisia Senatului pentru Relații Externe",
-                                                "en": "Senate Committee on Foreign Relations",
-                                                "fr": "Commission du Sénat des Relations Étrangères"
-                                            }, 
+                                                "ro": "Comisia Senatului pentru Relații Externe"
+                                            },
                                             "description": {
-                                                "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
-                                                "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
-                                                "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+                                                "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu."
                                             },
                                             "references": [
                                                 { "text": "Registrul Oficial al Senatului", "url": "#" },
@@ -711,9 +699,9 @@
                 }
             } catch (error) {
                 console.error("Error initializing application:", error);
-                document.getElementById('timeline').innerHTML = 
-                    `<div class="loading" style="color: red;">${translations[currentLang].loadError} ${error.message}</div>`;
-                
+                document.getElementById('timeline').innerHTML =
+                    `<div class="loading" style="color: red;">Eroare la inițializarea aplicației: ${error.message}</div>`;
+
                 // Fall back to embedded data
                 timelineData = {
                     "2025": {
@@ -721,16 +709,12 @@
                             "Week 3 (May 15-21)": {
                                 "2025-05-20": [
                                     {
-                                        "time": "09:30 AM", 
+                                        "time": "09:30 AM",
                                         "title": {
-                                            "ro": "Comisia Senatului pentru Relații Externe",
-                                            "en": "Senate Committee on Foreign Relations",
-                                            "fr": "Commission du Sénat des Relations Étrangères"
-                                        }, 
+                                            "ro": "Comisia Senatului pentru Relații Externe"
+                                        },
                                         "description": {
-                                            "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu.",
-                                            "en": "Participated in hearing on international sanctions policy and questioned Secretary of State regarding Middle East diplomatic initiatives.",
-                                            "fr": "A participé à l'audition sur la politique de sanctions internationales et a interrogé le Secrétaire d'État concernant les initiatives diplomatiques au Moyen-Orient."
+                                            "ro": "A participat la audierea privind politica de sancțiuni internaționale și a chestionat Secretarul de Stat cu privire la inițiativele diplomatice din Orientul Mijlociu."
                                         },
                                         "references": [
                                             { "text": "Registrul Oficial al Senatului", "url": "#" },
@@ -744,22 +728,10 @@
                 };
                 generateTimeline();
             }
-            
-            // Setup language switcher
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Update active button
-                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Set language
-                    setLanguage(this.getAttribute('data-lang'));
-                });
-            });
-            
+
             // Setup search
             document.getElementById('searchButton').addEventListener('click', searchActivities);
-            document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            document.getElementById('searchInput').addEventListener('keyup', function (event) {
                 if (event.key === 'Enter') {
                     searchActivities();
                 }
@@ -767,4 +739,5 @@
         });
     </script>
 </body>
+
 </html>
