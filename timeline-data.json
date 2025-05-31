@@ -2,18 +2,23 @@
   "2025": {
     "Mai": {
       "Săptămâna 1 (19-25 Mai)": {
-        "Vineri 22/05/2025": [
+        "Vineri 23/05/2025": [
+          {
+            "time": "12:00 - ",
+            "title": {
+              "ro": "s"
+            },
+            "description"
+          }
+        ]
+        "Joi 22/05/2025": [
           {
             "time": "12:00",
             "title": {
               "ro": "Ședința CCR pentru validarea rezultatului alegerilor pentru funcția de Președinte al României",
-              "en": "Agriculture Committee Hearing",
-              "fr": "Audition de la Commission de l'Agriculture"
             },
             "description": {
               "ro": "Nicușor Daniel-Dan este validat in funcția de președinte in cadrul ședinței CCR din 22 Mai 2025.",
-              "en": "Questioned witnesses on drought relief measures and farm subsidies.",
-              "fr": "A interrogé des témoins sur les mesures d'aide à la sécheresse et les subventions agricoles."
             },
             "references": [
               {
