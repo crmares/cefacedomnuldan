@@ -1,6 +1,77 @@
 {
   "2025": {
     "Mai": {
+      "Săptămâna 2 (26 Mai - 01 Iunie)": {
+        "Vineri 30/05/2025": [
+          {
+            "time": "08:00",
+            "title": {
+              "ro": "Declarații in fața locuinței"
+            },
+            "description": {
+              "ro": "Nicușor Daniel-Dan comentează decizia CCR privind declarațiile de avere."
+            },
+            "references": [
+              {
+                "text": "Romania TV Youtube",
+                "url": "https://www.youtube.com/watch?v=CK_jjVMaOsU"
+              }
+            ]
+          }
+        ],
+        "Joi 29/05/2025": [],
+        "Miercuri 28/05/2025": [
+          {
+            "time": "10:00",
+            "title": {
+              "ro": "Consultări informale cu partidele și formațiunile politice parlamentare"
+            },
+            "description": {
+              "ro": "Nicușor Daniel-Dan se întâlnește cu liderii partidelor parlamentare pentru discuții preliminare privind formarea guvernului."
+            },
+            "references": [
+              {
+                "text": "presidency.ro",
+                "url": "https://www.presidency.ro/ro/media/comunicate-de-presa/consultari-informale-cu-partidele-si-formatiunile-politice-parlamentare1748453627"
+              }
+            ]
+          }
+        ],
+        "Marți 27/05/2025": [
+          {
+            "time": "09:00 - 19:00",
+            "title": {
+              "ro": "Consultări informale cu partidele și formațiunile politice parlamentare"
+            },
+            "description": {
+              "ro": "Consultări informale cu partidele și formațiunile politice parlamentare pentru formarea noului guvern."
+            },
+            "references": [
+              {
+                "text": "presidency.ro",
+                "url": "https://www.presidency.ro/ro/media/comunicate-de-presa/consultari-informale-cu-partidele-si-formatiunile-politice-parlamentare"
+              }
+            ]
+          }
+        ],
+        "Luni 26/05/2025": [
+          {
+            "time": "12:00",
+            "title": {
+              "ro": "Depune jurământul de învestitură"
+            },
+            "description": {
+              "ro": "Nicușor Daniel-Dan depune jurământul de învestire în funcția de Președinte al României."
+            },
+            "references": [
+              {
+                "text": "Ceremonia de învestire TVR",
+                "url": "https://www.youtube.com/watch?v=a_Msz8gdQC4"
+              }
+            ]
+          }
+        ]
+      },
       "Săptămâna 1 (19-25 Mai)": {
         "Vineri 22/05/2025": [
           {
